@@ -1,0 +1,1 @@
+** In questa cartella tengo il diagramma delle classi del progetto, e altre cose correlate (es. casi d'uso **
