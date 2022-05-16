@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Buffet {
+	/* test */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
