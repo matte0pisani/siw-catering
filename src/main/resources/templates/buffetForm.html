@@ -5,10 +5,10 @@
 <title>Cerca buffet</title>
 </head>
 <body>
-	<form th:action="@{/buffet}" method="get" th:object="${buffet}">
+	<form th:action="@{/buffet}" method="get">
 		<h4>Inserisci il nome del buffet:</h4>
 		<div>
-			<input type="text" th:field="*{nome}" />
+			<input type="text" name="nome" />
 		</div>
 
 		<div>
