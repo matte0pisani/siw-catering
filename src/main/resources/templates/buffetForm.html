@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Cerca buffet</title>
+</head>
+<body>
+	<form th:action="@{/buffet}" method="get" th:object="${buffet}">
+		<h4>Inserisci il nome del buffet:</h4>
+		<div>
+			<input type="text" th:field="*{nome}" />
+		</div>
+
+		<div>
+			<button type="submit">Cerca</button>
+		</div>
+	</form>
+</body>
+</html>
