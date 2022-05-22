@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title> Il tuo buffet </title>	<!-- FIXME come mettere nel titolo un'espressione di thymeleaf? -->
+<title th:text="'Il tuo buffet: ' + ${buffet.nome}">Il tuo buffet</title>
 </head>
 <body>
 	<div>

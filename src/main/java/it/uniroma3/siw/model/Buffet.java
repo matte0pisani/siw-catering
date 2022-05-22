@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Buffet {
@@ -18,6 +19,7 @@ public class Buffet {
 	private Long id;
 	
 	@Column(unique = true)
+	@NotBlank
 	private String nome;
 	
 	@Column(length = 512)
