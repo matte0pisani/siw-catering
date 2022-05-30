@@ -6,11 +6,22 @@
 </head>
 <body>
 	<form th:action="@{/buffet}" method="get">
-		<h4>Inserisci il nome del buffet:</h4>
+		<h4>Inserisci il nome del buffet che stai cercando:</h4>
 		<div>
 			<input type="text" name="nome" />
 		</div>
-
+		<br>
+		<div>
+			<button type="submit">Cerca</button>
+		</div>
+	</form>
+	
+	<form th:action="@{/buffets}" method="get">
+		<h4>Oppure inserisci il nome e il cognome di uno chef per visualizzare i suoi buffet:</h4>
+		<div>
+			<input type="text" name="nomeCognome" />
+		</div>
+		<br>
 		<div>
 			<button type="submit">Cerca</button>
 		</div>

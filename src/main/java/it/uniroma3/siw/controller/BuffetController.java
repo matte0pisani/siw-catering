@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,15 +22,28 @@ public class BuffetController {
 	}
 
 	@GetMapping("/buffet")
-	public String getBuffet(@RequestParam(name = "nome") String nome, Model model) {
+	public String getBuffetByNome(@RequestParam(name = "nome") String nome, Model model) {
 		Buffet buffet = buffServ.getBuffet(nome);
-		if(buffet != null) {		// FIXME controllo da migliorare
+		if(buffet != null) {		// FIXME controllo da migliorare; include se nome == null o blank
 			model.addAttribute("buffet", buffet);
 			return "buffet.html";
 		}
-		else {
+		else
 			return "buffetForm.html";
+	}
+
+	@GetMapping("/buffets")
+	public String getBuffetsByChef(@RequestParam(name = "nomeCognome") String nomeCognome, Model model) {
+		if(nomeCognome != null && !nomeCognome.isBlank()) {
+			List<Buffet> buffets = buffServ.getTuttiBuffetPerNomeChef(nomeCognome);
+			if(buffets != null) {
+				model.addAttribute("buffets", buffets);
+				model.addAttribute("chef", nomeCognome);
+				return "buffets.html";
+			}
 		}
+		
+		return "buffetForm";
 	}
 
 }
