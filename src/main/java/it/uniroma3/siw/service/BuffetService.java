@@ -13,7 +13,7 @@ public class BuffetService {
 	@Autowired
 	private BuffetRepository repo;
 	
-	public Buffet getBuffet(String nome) {
+	public Buffet getBuffetPerNome(String nome) {
 		return repo.findByNome(nome);
 	}
 	
@@ -21,7 +21,7 @@ public class BuffetService {
 		String[] splitString = nomeCognomeChef.split(" ");
 		List<Buffet> buffets = repo.findByChefNomeAndChefCognome(splitString[0], splitString[1]);
 		if(buffets == null)
-			buffets = repo.findByChefNomeAndChefCognome(splitString[0], splitString[1]);	// permetto all'utente l'inserimento in qualsiasi ordine
+			buffets = repo.findByChefNomeAndChefCognome(splitString[1], splitString[0]);	// FIXME non funziona, perché?
 		return buffets;
 	}
 

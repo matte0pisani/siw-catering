@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,6 +32,16 @@ public class Buffet {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Piatto> piatti;	// FIXME sarebbe meglio mappa
 	
+	public Buffet(String nome, String descrizione) {
+		this.nome = nome;
+		this.descrizione = descrizione;
+		this.piatti = new ArrayList<Piatto>();
+	}
+	
+	public Buffet() {
+		this(null, null);
+	}
+
 	public Long getId() {
 		return id;
 	}
