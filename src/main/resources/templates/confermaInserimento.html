@@ -2,26 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title th:text="'Il tuo buffet: ' + ${buffet.nome}">Il tuo buffet</title>
+<title th:text="'Il tuo buffet: ' + ${buffet.nome}">Il tuo
+	buffet</title>
 </head>
 <body>
+	<h2>Successo!</h2>
+	<h4>Ecco un riepilogo del buffet inserito:</h4>
 	<div>
-		<h4>
-			Buffet <span th:text="${buffet.nome}"></span>
-		</h4>
+		<div>
+			<span> Nome: </span> <span th:text="${buffet.nome}"></span>
+		</div>
 		<div>
 			<span> Descrizione: </span>
 			<span th:text="${buffet.descrizione}"></span>
 		</div>
 		<div>
-			<span> Chef: </span>
-			<span th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></span>
+			<span> Chef: </span> <span th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></span>
 		</div>
 		<div>Piatti:</div>
 		<ul>
 			<li th:each="piatto : ${buffet.piatti}">
 				<div th:text="${piatto.nome}"></div>
-				<div th:text="${piatto.descrizione}"></div>
 			</li>
 		</ul>
 	</div>

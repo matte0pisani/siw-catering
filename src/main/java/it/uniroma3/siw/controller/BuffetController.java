@@ -66,7 +66,7 @@ public class BuffetController {
 		// FIXME per ora saltiamo il controllo sulla validità del contenuto del bean
 		if(bean != null) {
 			Buffet buffet = new Buffet(bean.getNome(), bean.getDescrizione());
-//			Iterable<Chef> allChefs = (Iterable<Chef>) model.getAttribute("chefs");
+//			Iterable<Chef> allChefs = (Iterable<Chef>) model.getAttribute("chefs");	// model viene "ricreato" ad ogni sessione
 //			for(Chef c : allChefs) {
 //				if(c.getId() == bean.getChefs().get(0))
 //					buffet.setChef(c);
@@ -81,7 +81,8 @@ public class BuffetController {
 				buffet.getPiatti().add(piattoRepo.findById(id).get());
 			}
 			model.addAttribute("buffet", buffet);
-			return "buffet.html";
+			buffServ.save(buffet);
+			return "confermaInserimento.html";
 		}
 		return "inserisciBuffetForm";
 	}

@@ -24,5 +24,9 @@ public class BuffetService {
 			buffets = repo.findByChefNomeAndChefCognome(splitString[1], splitString[0]);	// FIXME non funziona, perché?
 		return buffets;
 	}
+	
+	public void save(Buffet buffet) {
+		repo.save(buffet);
+	}
 
 }
