@@ -31,7 +31,7 @@ public class BuffetController {
 	
 	@GetMapping("/inserisciBuffetForm")
 	public String getInserisciBuffetForm(Model model) {
-		model.addAttribute("buffet", new Buffet());
+		model.addAttribute("bean", new InserisciBuffetBean());
 		model.addAttribute("chefs", chefRepo.findAll());
 		model.addAttribute("piatti", piattoRepo.findAll());
 		return "inserisciBuffetForm.html";
@@ -62,24 +62,24 @@ public class BuffetController {
 	}
 	
 	@PostMapping("/inserisciBuffet")
-	public String insertBuffet(Buffet buffet, Model model) {
+	public String insertBuffet(InserisciBuffetBean bean, Model model) {
 		// FIXME per ora saltiamo il controllo sulla validità del contenuto del bean
-		if(buffet != null) {
-//			Buffet buffet = new Buffet(buffet.getNome(), buffet.getDescrizione());
-////			Iterable<Chef> allChefs = (Iterable<Chef>) model.getAttribute("chefs");	// model viene "ricreato" ad ogni sessione
-////			for(Chef c : allChefs) {
-////				if(c.getId() == bean.getChefs().get(0))
-////					buffet.setChef(c);
-////			}
-//			buffet.setChef(chefRepo.findById(buffet.getChefs().get(0)).get());
-////			Iterable<Piatto> allPiatti = (Iterable<Piatto>) model.getAttribute("piatti");
-////			for(Piatto p : allPiatti) {
-////				if(bean.getPiatti().contains(p.getId()))
-////					buffet.getPiatti().add(p);
-////			}
-//			for(Long id : buffet.getPiatti()) {
-//				buffet.getPiatti().add(piattoRepo.findById(id).get());
+		if(bean != null) {
+			Buffet buffet = new Buffet(bean.getNome(), bean.getDescrizione());
+//			Iterable<Chef> allChefs = (Iterable<Chef>) model.getAttribute("chefs");	// model viene "ricreato" ad ogni sessione
+//			for(Chef c : allChefs) {
+//				if(c.getId() == bean.getChefs().get(0))
+//					buffet.setChef(c);
 //			}
+			buffet.setChef(chefRepo.findById(bean.getChefs().get(0)).get());
+//			Iterable<Piatto> allPiatti = (Iterable<Piatto>) model.getAttribute("piatti");
+//			for(Piatto p : allPiatti) {
+//				if(bean.getPiatti().contains(p.getId()))
+//					buffet.getPiatti().add(p);
+//			}
+			for(Long id : bean.getPiatti()) {
+				buffet.getPiatti().add(piattoRepo.findById(id).get());
+			}
 			model.addAttribute("buffet", buffet);
 			buffServ.save(buffet);
 			return "confermaInserimento.html";

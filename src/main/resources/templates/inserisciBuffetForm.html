@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h4>Inserisci i dati del buffet che vuoi aggiungere:</h4>
-	<form th:action="@{/inserisciBuffet}" method="post" th:object="${buffet}">
+	<form th:action="@{/inserisciBuffet}" method="post" th:object="${bean}">
 		<div>
 			<label>Nome: </label> <input type="text" th:field="*{nome}" />
 		</div>
@@ -18,7 +18,7 @@
 		<div>
 			<label>Chef disponibili: </label>
 			<div th:each="chef : ${chefs}">
-				<input type="checkbox" th:name="'chef' + ${chef.id}" th:value="${chef}" th:field="*{chef}"/> 
+				<input type="checkbox" th:name="'chef' + ${chef.id}" th:value="${chef.id}" th:field="*{chefs}"/> 
 				<label th:for="'chef' + ${chef.id}" th:text="${chef.nome} + ' ' + ${chef.cognome}"></label>
 			</div>
 		</div>
@@ -26,7 +26,7 @@
 		<div>
 			<label>Piatti disponibili: </label>
 			<div th:each="piatto : ${piatti}">
-				<input type="checkbox" th:name="'piattoSelezionato' + ${piatto.id}" th:value="${piatto}" th:field="*{piatti}"/> 
+				<input type="checkbox" th:name="'piattoSelezionato' + ${piatto.id}" th:value="${piatto.id}" th:field="*{piatti}"/> 
 				<label th:for="'piattoSelezionato' + ${piatto.id}" th:text="${piatto.nome}"></label>
 			</div>
 		</div>
