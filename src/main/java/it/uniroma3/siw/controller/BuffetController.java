@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.siw.controller.beans.EliminaBuffetBean;
 import it.uniroma3.siw.controller.beans.InserisciBuffetBean;
 import it.uniroma3.siw.model.Buffet;
 import it.uniroma3.siw.repository.ChefRepository;
@@ -35,6 +36,13 @@ public class BuffetController {
 		model.addAttribute("chefs", chefRepo.findAll());
 		model.addAttribute("piatti", piattoRepo.findAll());
 		return "inserisciBuffetForm.html";
+	}
+	
+	@GetMapping("/eliminaBuffetForm")
+	public String getEliminaBuffetForm(Model model) {
+		model.addAttribute("bean", new EliminaBuffetBean());
+		model.addAttribute("buffets", buffServ.getTuttiBuffet());
+		return "eliminaBuffetForm.html";
 	}
 
 	@GetMapping("/buffet")
@@ -85,6 +93,16 @@ public class BuffetController {
 			return "confermaInserimento.html";
 		}
 		return "inserisciBuffetForm";
+	}
+	
+	@PostMapping("/eliminaBuffet")
+	public String eliminaBuffet(EliminaBuffetBean bean, Model model) {
+		// FIXME per ora saltiamo controllo di validità (se utente ha selezionato almento un buffet)
+		if(bean != null) {
+			model.addAttribute("buffets", buffServ.deletePerId(bean.getBuffetIds()));
+			return "confermaEliminazione.html";				
+		}
+		return "eliminaBuffetForm";
 	}
 
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Conferma eliminazione</title>
+</head>
+<body>
+	<h2>Successo!</h2>
+	<h4>Hai eliminato i seguenti buffet:</h4>
+	<div>
+		<ul>
+			<li th:each="buffet : ${buffets}">
+				<div th:text="${buffet.nome}"></div>
+			</li>
+		</ul>
+	</div>
+	<footer>
+		<a href="/">Torna alla homepage</a>
+	</footer>
+</body>
+</html>

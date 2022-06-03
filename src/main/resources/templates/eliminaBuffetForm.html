@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Eliminazione buffet</title>
+</head>
+<body>
+	<h4>Selezione i buffet che vuoi rimuovere:</h4>
+	<form th:action="@{/eliminaBuffet}" method="post" th:object="${bean}">
+		<div>
+			<div th:each="buffet : ${buffets}">
+				<input type="checkbox" th:name="'buffet' + ${buffet.id}" th:value="${buffet.id}" th:field="*{buffetIds}" /> 
+				<label th:for="'buffet' + ${buffet.id}" th:text="${buffet.nome}"></label>
+			</div>
+		</div>
+		<br>
+		<div>
+			<button type="submit">Inserisci</button>
+		</div>
+	</form>
+</body>
+</html>

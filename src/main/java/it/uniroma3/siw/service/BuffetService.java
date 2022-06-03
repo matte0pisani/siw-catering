@@ -1,5 +1,6 @@
 package it.uniroma3.siw.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,16 @@ public class BuffetService {
 	public void save(Buffet buffet) {
 		repo.save(buffet);
 	}
+	
+	public List<Buffet> getTuttiBuffet() {
+		return (List<Buffet>) repo.findAll();
+	}
+	
+	public List<Buffet> deletePerId(Collection<Long> ids) {	// FIXME nome più evocativo?
+		List<Buffet> result = (List<Buffet>) repo.findAllById(ids);
+		repo.deleteAllById(ids);
+		return result;
+	}
+	// eventuale versione sovraccariva potrebbe essere utile
 
 }
