@@ -44,6 +44,12 @@ public class BuffetController {
 		model.addAttribute("buffets", buffServ.getTuttiBuffet());
 		return "eliminaBuffetForm.html";
 	}
+	
+	@GetMapping("/allBuffets")
+	public String getTuttiBuffet(Model model) {
+		model.addAttribute("buffets", buffServ.getTuttiBuffet());
+		return "buffets.html";
+	}
 
 	@GetMapping("/buffet")
 	public String getBuffetByNome(@RequestParam(name = "nome") String nome, Model model) {
@@ -105,4 +111,9 @@ public class BuffetController {
 		return "eliminaBuffetForm";
 	}
 
+	// FIXME temporaneo
+	@GetMapping("/getAmministratorePage") 
+	public String getAmministratorePage(Model model) {
+		return "amministratore";
+	}
 }

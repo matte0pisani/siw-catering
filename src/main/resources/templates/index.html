@@ -2,21 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Servizio Catering</title>
+<title>Servizio Catering EXPRESS</title>
 </head>
 <body>
 	<div>
-		<h2>Servizio Catering - Benvenuto</h2>
-		<h4>Area utente</h4>
+		<h1>Servizio Catering EXPRESS</h1>
 		<div>
+			<a href="/">home</a>
+			<a th:href="@{/allBuffets}">i nostri buffet</a>
+			<a th:href="@{/allChefs}">i nostri chef</a>
+			<a href="">chi siamo</a>	<!-- FIXME -->
+			<a href="">accedi</a>		<!-- FIXME -->
+			<a th:href="@{/getAmministratorePage}">area amministratore</a>
+		</div>
+		<div>
+			<h2>Il tuo evento, con gusto!</h2>
+			<div>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie non erat eget blandit. Sed euismod vestibulum cursus. Cras dictum felis leo, id cursus enim ornare rutrum. Ut bibendum laoreet ante nec porttitor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Phasellus sit amet dui id dolor consequat lacinia.
+			</div>
+			<!-- <img src="../static/buffet-1.jpg" width="10%"> funziona -->
+		</div>
+		<div>
+			<h3>Una vasta gamma di scelte</h3>
+			<div>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie non erat eget blandit. Sed euismod vestibulum cursus. Cras dictum felis leo, id cursus enim ornare rutrum!
+			</div>
+			<a th:href="@{/allBuffets}">Visualizza tutti i buffet</a>
+		</div>
+		<div>
+			<h3>Comincia ad esplorare</h3>
+			<div>
+				Hai già qualcosa in mente, o vorrei provare un buffet di uno chef che ti ha soddisfatto in passato? Prova il nostro strumento di ricerca
+				avanzata.
+			</div>
 			<a th:href="@{/cercaBuffetForm}">Cerca un buffet</a>
-		</div>
-		<h4>Area amministratore</h4>
-		<div>
-			<a th:href="@{/inserisciBuffetForm}">Inserisci un buffet</a>
-		</div>
-		<div>
-			<a th:href="@{/eliminaBuffetForm}">Elimina buffet</a>
 		</div>
 	</div>
 </body>

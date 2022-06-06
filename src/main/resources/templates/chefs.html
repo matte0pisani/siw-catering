@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>I nostri chef</title>	<!-- FIXME prova a rimettere titolo variabile -->
+</head>
+<body>
+	<div>
+	<h4>Ecco l'elenco completo dei nostri chef::</h4>
+	</div>
+	<div>
+	<ul>
+		<li th:each="chef : ${chefs}">
+			<div th:text="${chef.nome} + ' ' +${chef.cognome}">Chef chef</div>
+			<div th:text="'Nazionalità: ' + ${chef.nazionalita}">Nazionalita</div>
+		</li>
+	</ul>
+	</div>
+	<footer>
+		<a href="/">Torna alla homepage</a>
+	</footer>
+</body>
+</html>

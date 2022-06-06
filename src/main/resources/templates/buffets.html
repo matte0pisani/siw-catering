@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title th:text="'I buffet di ' + ': ' + ${chef}">I buffet dello chef</title>
+<title>I nostri buffet</title>	<!-- FIXME prova a rimettere titolo variabile -->
 </head>
 <body>
 	<div>
-	<h4 th:text="'I buffet di ' + ${chef} + ':'">I buffet dello chef:</h4>
+	<h4 th:if="${chef}" th:text="'I buffet di ' + ${chef} + ':'">I buffet dello chef:</h4>
+	<h4 th:unless="${chef}">Le nostre proposte:</h4>
 	</div>
 	<div>
 	<ul>
