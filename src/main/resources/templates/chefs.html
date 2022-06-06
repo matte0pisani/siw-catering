@@ -11,8 +11,7 @@
 	<div>
 	<ul>
 		<li th:each="chef : ${chefs}">
-			<div th:text="${chef.nome} + ' ' +${chef.cognome}">Chef chef</div>
-			<div th:text="'Nazionalità: ' + ${chef.nazionalita}">Nazionalita</div>
+			<a th:href="@{'/chef/' + ${chef.id}}" th:text="${chef.nome} + ' ' +${chef.cognome}">Chef chef</a>
 		</li>
 	</ul>
 	</div>

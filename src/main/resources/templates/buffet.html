@@ -15,7 +15,7 @@
 		</div>
 		<div>
 			<span> Chef: </span>
-			<span th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></span>
+			<a th:href="@{'/chef/' + ${buffet.chef.id}}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></a>
 		</div>
 		<div>Piatti:</div>
 		<ul>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -60,6 +61,12 @@ public class BuffetController {
 		}
 		else
 			return "cercaBuffetForm.html";
+	}
+	
+	@GetMapping("/buffet/{id}")
+	public String getBuffetById(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("buffet", buffServ.getBuffetPerId(id));
+		return "buffet.html";
 	}
 
 	@GetMapping("/buffets")

@@ -16,4 +16,8 @@ public class ChefService {
 	public List<Chef> getTuttiChef() {
 		return (List<Chef>) repo.findAll();
 	}
+
+	public Chef getChefPerId(Long id) {
+		return repo.findById(id).get();
+	}
 }
