@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width">
+<title th:text="'Il tuo piatto: ' + ${piatto.nome}">Il tuo buffet</title>
+</head>
+<body>
+	<div>
+		<h4>
+			Piatto: <span th:text="${piatto.nome}"></span>
+		</h4>
+		<div>
+			<span> Descrizione: </span>
+			<span th:text="${piatto.descrizione}"></span>
+		</div>
+		<div>Ingredienti:</div>
+		<ul>
+			<li th:each="ingrediente : ${piatto.ingredienti}">
+				<div th:text="${ingrediente.nome}">
+				<!--	<a th:href="@{'/ingrediente/' + ${ingrediente.id}}" th:text="${ingrediente.nome}"></a> -->
+				</div>
+				<div th:text="'Descrizione: ' + ${ingrediente.descrizione}"></div>
+				<div th:text="'Origine: ' + ${ingrediente.origine}"></div>
+			</li>
+		</ul>
+	</div>
+	<footer>
+		<a href="/">Torna alla homepage</a>
+	</footer>
+</body>
+</html>

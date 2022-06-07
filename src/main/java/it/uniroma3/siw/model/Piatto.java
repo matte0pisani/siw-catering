@@ -1,10 +1,13 @@
 package it.uniroma3.siw.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Piatto {
@@ -18,8 +21,8 @@ public class Piatto {
 	@Column(length = 512)
 	private String descrizione;
 	
-//	@ManyToMany
-//	private List<Ingrediente> ingredienti;	// FIXME meglio mappa
+	@ManyToMany
+	private List<Ingrediente> ingredienti;	// FIXME meglio mappa
 
 	public Long getId() {
 		return id;
@@ -45,12 +48,12 @@ public class Piatto {
 		this.descrizione = descrizione;
 	}
 
-//	public List<Ingrediente> getIngredienti() {
-//		return ingredienti;
-//	}
-//
-//	public void setIngredienti(List<Ingrediente> ingredienti) {
-//		this.ingredienti = ingredienti;
-//	}
+	public List<Ingrediente> getIngredienti() {
+		return ingredienti;
+	}
+
+	public void setIngredienti(List<Ingrediente> ingredienti) {
+		this.ingredienti = ingredienti;
+	}
 		
 }

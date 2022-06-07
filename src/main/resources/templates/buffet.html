@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width">
 <title th:text="'Il tuo buffet: ' + ${buffet.nome}">Il tuo buffet</title>
 </head>
 <body>
@@ -20,7 +21,9 @@
 		<div>Piatti:</div>
 		<ul>
 			<li th:each="piatto : ${buffet.piatti}">
-				<div th:text="${piatto.nome}"></div>
+				<div>
+					<a th:href="@{'/piatto/' + ${piatto.id}}" th:text="${piatto.nome}"></a>
+				</div>
 				<div th:text="${piatto.descrizione}"></div>
 			</li>
 		</ul>
