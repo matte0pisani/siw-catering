@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width">
- <link rel="stylesheet" href="cercaBuffet.css">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="cercaBuffet.css">
 <title>Cerca buffet</title>
 </head>
 <body>
@@ -11,8 +11,8 @@
 		<h4>Inserisci il nome del buffet che stai cercando:</h4>
 		<div>
 			<input type="text" name="nome" />
-			<div class="error" th:if="${isNomeBlank}" th:text="#{NotBlank}"></div> <!-- FIXME deve essere rosso -->
-			<div class="error" th:if="${isBuffetInesistente}" th:text="#{buffet.inesistente}"></div> <!-- FIXME deve essere rosso -->
+			<div class="error" th:if="${isNomeBlank}" th:text="#{NotBlank}"></div>
+			<div class="error" th:if="${isBuffetInesistente}" th:text="#{buffet.inesistente}"></div>
 		</div>
 		<br>
 		<div>
@@ -24,8 +24,8 @@
 		<h4>Oppure inserisci il nome e il cognome di uno chef per visualizzare i suoi buffet:</h4>
 		<div>
 			<input type="text" name="nomeCognome" />
-			<div class="error" th:if="${isNomeCognomeBlank}" th:text="#{NotBlank}"></div> <!-- FIXME deve essere rosso -->
-			<div class="error" th:if="${isBuffetsInesistenti}" th:text="#{buffet.inesistenti}"></div> <!-- FIXME deve essere rosso -->
+			<div class="error" th:if="${isNomeCognomeBlank}" th:text="#{NotBlank}"></div>
+			<div class="error" th:if="${isBuffetsInesistenti}" th:text="#{buffet.inesistenti}"></div>
 		</div>
 		<br>
 		<div>

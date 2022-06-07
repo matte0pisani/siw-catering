@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
+ <link rel="stylesheet" href="inserisciBuffetForm.css">
 <meta name="viewport" content="width=device-width">
 <title>Inserimento buffet</title>
 </head>
@@ -13,13 +14,14 @@
 		</div>
 		<br>
 		<div>
-			<label>Descrizione: </label> <input type="text" th:field="*{descrizione}" /> <!-- prova con textarea -->
+			<label>Descrizione: </label> <input type="text" th:field="*{descrizione}" />
+			<!-- prova con textarea -->
 		</div>
 		<br>
 		<div>
 			<label>Chef disponibili: </label>
 			<div th:each="chef : ${chefs}">
-				<input type="checkbox" th:name="'chef' + ${chef.id}" th:value="${chef.id}" th:field="*{chefs}"/> 
+				<input type="radio" th:name="'chef' + ${chef.id}" th:value="${chef.id}" th:field="*{chefs}" /> 
 				<label th:for="'chef' + ${chef.id}" th:text="${chef.nome} + ' ' + ${chef.cognome}"></label>
 			</div>
 		</div>
@@ -27,8 +29,10 @@
 		<div>
 			<label>Piatti disponibili: </label>
 			<div th:each="piatto : ${piatti}">
-				<input type="checkbox" th:name="'piattoSelezionato' + ${piatto.id}" th:value="${piatto.id}" th:field="*{piatti}"/> 
-				<label th:for="'piattoSelezionato' + ${piatto.id}" th:text="${piatto.nome}"></label>
+				<input type="checkbox" th:name="'piattoSelezionato' + ${piatto.id}"
+					th:value="${piatto.id}" th:field="*{piatti}" /> <label
+					th:for="'piattoSelezionato' + ${piatto.id}"
+					th:text="${piatto.nome}"></label>
 			</div>
 		</div>
 		<br>
