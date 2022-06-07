@@ -2,13 +2,23 @@ package it.uniroma3.siw.controller.beans;
 
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class InserisciBuffetBean {
+	@NotBlank
 	private String nome;
+	
+	@NotBlank
 	private String descrizione;
+	
+	@NotEmpty
 	private List<Long> chefs;
+	
+	@NotEmpty
 	private List<Long> piatti;
 	
 	public String getNome() {
@@ -41,6 +51,10 @@ public class InserisciBuffetBean {
 	
 	public void setPiatti(List<Long> piatti) {
 		this.piatti = piatti;
+	}
+	
+	public Long getPrimoChefId() {
+		return this.getChefs().get(0);
 	}
 	
 	

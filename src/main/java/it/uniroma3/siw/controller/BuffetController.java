@@ -2,9 +2,12 @@ package it.uniroma3.siw.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,18 +16,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.controller.beans.EliminaBuffetBean;
 import it.uniroma3.siw.controller.beans.InserisciBuffetBean;
 import it.uniroma3.siw.model.Buffet;
-import it.uniroma3.siw.repository.ChefRepository;
-import it.uniroma3.siw.repository.PiattoRepository;
 import it.uniroma3.siw.service.BuffetService;
+import it.uniroma3.siw.service.ChefService;
+import it.uniroma3.siw.service.PiattoService;
 
 @Controller
 public class BuffetController {
 	@Autowired
-	private BuffetService buffServ;
+	private BuffetService buffService;
 	@Autowired
-	private ChefRepository chefRepo;	//FIXME solo per velocità
+	private ChefService chefService;
 	@Autowired
-	private PiattoRepository piattoRepo;	//FIXME solo per velocità
+	private PiattoService piattoService;
 
 	@GetMapping("/cercaBuffetForm")
 	public String getCercaBuffetForm(Model model) {
@@ -34,28 +37,28 @@ public class BuffetController {
 	@GetMapping("/inserisciBuffetForm")
 	public String getInserisciBuffetForm(Model model) {
 		model.addAttribute("bean", new InserisciBuffetBean());
-		model.addAttribute("chefs", chefRepo.findAll());
-		model.addAttribute("piatti", piattoRepo.findAll());
+		model.addAttribute("chefs", chefService.getTuttiChef());
+		model.addAttribute("piatti", piattoService.getTuttiPiatti());
 		return "inserisciBuffetForm.html";
 	}
 
 	@GetMapping("/eliminaBuffetForm")
 	public String getEliminaBuffetForm(Model model) {
 		model.addAttribute("bean", new EliminaBuffetBean());
-		model.addAttribute("buffets", buffServ.getTuttiBuffet());
+		model.addAttribute("buffets", buffService.getTuttiBuffet());
 		return "eliminaBuffetForm.html";
 	}
 
 	@GetMapping("/allBuffets")
 	public String getTuttiBuffet(Model model) {
-		model.addAttribute("buffets", buffServ.getTuttiBuffet());
+		model.addAttribute("buffets", buffService.getTuttiBuffet());
 		return "buffets.html";
 	}
 
 	@GetMapping("/buffet")
 	public String getBuffetByNome(@RequestParam(name = "nome") String nome, Model model) {
 		if(!(nome == null || nome.isBlank())) {
-			Buffet buffet = buffServ.getBuffetPerNome(nome);
+			Buffet buffet = buffService.getBuffetPerNome(nome);
 			if(buffet != null) {
 				model.addAttribute("buffet", buffet);
 				return "buffet.html";
@@ -75,14 +78,14 @@ public class BuffetController {
 
 	@GetMapping("/buffet/{id}")
 	public String getBuffetById(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("buffet", buffServ.getBuffetPerId(id));
+		model.addAttribute("buffet", buffService.getBuffetPerId(id));
 		return "buffet.html";
 	}
 
 	@GetMapping("/buffets")
 	public String getBuffetsByChef(@RequestParam(name = "nomeCognome") String nomeCognome, Model model) {
 		if(nomeCognome != null && !nomeCognome.isBlank()) {
-			List<Buffet> buffets = buffServ.getTuttiBuffetPerNomeChef(nomeCognome);
+			List<Buffet> buffets = buffService.getTuttiBuffetPerNomeChef(nomeCognome);
 			if(buffets != null && !buffets.isEmpty()) {
 				model.addAttribute("buffets", buffets);
 				model.addAttribute("chef", nomeCognome);
@@ -100,26 +103,15 @@ public class BuffetController {
 	}
 
 	@PostMapping("/inserisciBuffet")
-	public String insertBuffet(InserisciBuffetBean bean, Model model) {
-		// FIXME per ora saltiamo il controllo sulla validità del contenuto del bean
-		if(bean != null) {
+	public String insertBuffet(@Valid InserisciBuffetBean bean, Model model, BindingResult bindingResult) {
+		if(!bindingResult.hasErrors()) {
 			Buffet buffet = new Buffet(bean.getNome(), bean.getDescrizione());
-			//			Iterable<Chef> allChefs = (Iterable<Chef>) model.getAttribute("chefs");	// model viene "ricreato" ad ogni sessione
-			//			for(Chef c : allChefs) {
-			//				if(c.getId() == bean.getChefs().get(0))
-			//					buffet.setChef(c);
-			//			}
-			buffet.setChef(chefRepo.findById(bean.getChefs().get(0)).get());
-			//			Iterable<Piatto> allPiatti = (Iterable<Piatto>) model.getAttribute("piatti");
-			//			for(Piatto p : allPiatti) {
-			//				if(bean.getPiatti().contains(p.getId()))
-			//					buffet.getPiatti().add(p);
-			//			}
+			buffet.setChef(chefService.getChefPerId(bean.getPrimoChefId()));
 			for(Long id : bean.getPiatti()) {
-				buffet.getPiatti().add(piattoRepo.findById(id).get());
+				buffet.addPiatto(piattoService.getPiattoPerId(id));
 			}
 			model.addAttribute("buffet", buffet);
-			buffServ.save(buffet);
+			buffService.save(buffet);
 			return "confermaInserimento.html";
 		}
 		return "inserisciBuffetForm";
@@ -129,7 +121,7 @@ public class BuffetController {
 	public String eliminaBuffet(EliminaBuffetBean bean, Model model) {
 		// FIXME per ora saltiamo controllo di validità (se utente ha selezionato almento un buffet)
 		if(bean != null) {
-			model.addAttribute("buffets", buffServ.deletePerId(bean.getBuffetIds()));
+			model.addAttribute("buffets", buffService.deletePerId(bean.getBuffetIds()));
 			return "confermaEliminazione.html";				
 		}
 		return "eliminaBuffetForm";

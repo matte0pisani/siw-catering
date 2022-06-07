@@ -93,5 +93,9 @@ public class Buffet {
 		}
 		return null;
 	}
+	
+	public void addPiatto(Piatto p) {
+		this.piatti.add(p);
+	}
 
 }
