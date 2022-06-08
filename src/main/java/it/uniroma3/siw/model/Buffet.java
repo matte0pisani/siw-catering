@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Buffet {
@@ -26,9 +28,11 @@ public class Buffet {
 	@Column(length = 512)
 	private String descrizione;
 	
+	@NotNull
 	@ManyToOne
 	private Chef chef;
 	
+	@NotEmpty
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Piatto> piatti;	// FIXME sarebbe meglio mappa
 	

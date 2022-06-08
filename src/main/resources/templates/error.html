@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+ <link rel="stylesheet" href="inserisciBuffetForm.css">
+<meta name="viewport" content="width=device-width">
+<title>Inserimento buffet</title>
+</head>
+<body>
+	<h2>Ops! Qualcosa è andato storto.</h2>
+	<div>
+  		  	<span th:if="${duplicato}" th:text="#{duplicato.inserisciBuffetBean}"></span>
+  			<span th:unless="${duplicato}">
+  				Non è stato possibile processare la tua richiesta. Ricontrolla che tutti i campi necessari (nome, descrizione, chef e piatti) siano stati compilati.
+  			</span>
+  	</div>
+	<footer>
+		<a th:href="@{/inserisciBuffetForm}">Torna all'inserimento del buffet</a>
+		<a href="/">Torna alla homepage</a>
+	</footer>
+	<div>
+  	</div>
+</body>
+</html>

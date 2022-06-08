@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
@@ -20,6 +21,11 @@ public class InserisciBuffetBean {
 	
 	@NotEmpty
 	private List<Long> piatti;
+	
+	public InserisciBuffetBean() {
+		chefs = new ArrayList<>();
+		piatti = new ArrayList<>();
+	}
 	
 	public String getNome() {
 		return nome;

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.controller.beans.EliminaBuffetBean;
 import it.uniroma3.siw.controller.beans.InserisciBuffetBean;
+import it.uniroma3.siw.controller.validator.InserisciBuffetBeanValidator;
 import it.uniroma3.siw.model.Buffet;
 import it.uniroma3.siw.service.BuffetService;
 import it.uniroma3.siw.service.ChefService;
@@ -24,6 +25,8 @@ import it.uniroma3.siw.service.PiattoService;
 public class BuffetController {
 	@Autowired
 	private BuffetService buffService;
+	@Autowired
+	private InserisciBuffetBeanValidator beanValidator;
 	@Autowired
 	private ChefService chefService;
 	@Autowired
@@ -103,7 +106,8 @@ public class BuffetController {
 	}
 
 	@PostMapping("/inserisciBuffet")
-	public String insertBuffet(@Valid InserisciBuffetBean bean, Model model, BindingResult bindingResult) {
+	public String insertBuffet(@Valid InserisciBuffetBean bean, Model model, BindingResult bindingResult) {	// @Valid inutile
+		// beanValidator.validate(bean, bindingResult);	FIXME levalo, non usato
 		if(!bindingResult.hasErrors()) {
 			Buffet buffet = new Buffet(bean.getNome(), bean.getDescrizione());
 			buffet.setChef(chefService.getChefPerId(bean.getPrimoChefId()));
@@ -114,7 +118,8 @@ public class BuffetController {
 			buffService.save(buffet);
 			return "confermaInserimento.html";
 		}
-		return "inserisciBuffetForm";
+		model.addAttribute("duplicato", true);
+		return "error.html";
 	}
 
 	@PostMapping("/eliminaBuffet")
