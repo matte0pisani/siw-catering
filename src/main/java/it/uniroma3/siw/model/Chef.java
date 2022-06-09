@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames= {"nome", "cognome"}))
@@ -17,14 +19,21 @@ public class Chef {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotBlank
 	private String nome;
 	
+	@NotBlank
 	private String cognome;
 	
+	@NotBlank
 	private String nazionalita;	// FIXME tipo per nazione?
 	
 	@OneToMany(mappedBy = "chef")
 	private List<Buffet> buffets;
+	
+	public Chef() {
+		this.buffets = new ArrayList<Buffet>();
+	}
 
 	public Long getId() {
 		return id;

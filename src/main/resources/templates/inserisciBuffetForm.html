@@ -11,7 +11,6 @@
 	<form th:action="@{/inserisciBuffet}" method="post" th:object="${bean}">
 		<div>
 			<label>Nome: </label> <input type="text" th:field="*{nome}" />
-			<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 		</div>
 		<br>
 		<div>
@@ -21,22 +20,22 @@
 		<br>
 		<div>
 			<label>Chef disponibili: </label>
-			<span th:if="${#fields.hasErrors('chefs')}" th:errors="*{chefs}"></span>
 			<div th:each="chef : ${chefs}">
 				<input type="radio" th:name="'chef' + ${chef.id}" th:value="${chef.id}" th:field="*{chefs}" /> 
 				<label th:for="'chef' + ${chef.id}" th:text="${chef.nome} + ' ' + ${chef.cognome}"></label>
 			</div>
+			<label> Se vuoi aggiungere uno chef non presente nell'elenco, puoi aggiungerlo <a href="/inserisciChefForm">qui</a>.</label>
 		</div>
 		<br>
 		<div>
 			<label>Piatti disponibili: </label>
-			<span th:if="${#fields.hasErrors('piatti')}" th:errors="*{piatti}"></span>
 			<div th:each="piatto : ${piatti}">
 				<input type="checkbox" th:name="'piattoSelezionato' + ${piatto.id}"
 					th:value="${piatto.id}" th:field="*{piatti}" /> <label
 					th:for="'piattoSelezionato' + ${piatto.id}"
 					th:text="${piatto.nome}"></label>
 			</div>
+			<label> Se vuoi aggiungere un piatto non presente nell'elenco, puoi aggiungerlo <a href="/inserisciPiattoForm">qui</a>.</label>
 		</div>
 		<br>
 		<div>

@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Piatto {
@@ -15,12 +17,15 @@ public class Piatto {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotBlank
 	@Column(unique = true)
 	private String nome;
 	
+	@NotBlank
 	@Column(length = 512)
 	private String descrizione;
 	
+	@NotEmpty
 	@ManyToMany
 	private List<Ingrediente> ingredienti;	// FIXME meglio mappa
 

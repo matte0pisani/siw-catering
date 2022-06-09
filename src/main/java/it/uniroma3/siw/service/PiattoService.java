@@ -20,4 +20,12 @@ public class PiattoService {
 	public List<Piatto> getTuttiPiatti() {
 		return (List<Piatto>) repo.findAll();
 	}
+
+	public boolean verificaEsistenzaPiattoPerNome(String nome) {
+		return repo.findByNome(nome) != null;
+	}
+	
+	public void salva(Piatto p) {
+		repo.save(p);
+	}
 }

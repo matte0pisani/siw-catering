@@ -20,4 +20,12 @@ public class ChefService {
 	public Chef getChefPerId(Long id) {
 		return repo.findById(id).get();
 	}
+	
+	public boolean verificaEsisteChefPerNomeCognome(String nome, String cognome) {
+		return repo.findByNomeAndCognome(nome, cognome) != null;
+	}
+	
+	public void salva(Chef c) {
+		repo.save(c);
+	}
 }

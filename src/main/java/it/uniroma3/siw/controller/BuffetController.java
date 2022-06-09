@@ -109,7 +109,7 @@ public class BuffetController {
 			}
 			model.addAttribute("buffet", buffet);
 			buffService.save(buffet);
-			return "confermaInserimento.html";
+			return "confermaInserimentoBuffet.html";
 		}
 		model.addAttribute("duplicato", true);
 		return "error.html";
@@ -120,7 +120,7 @@ public class BuffetController {
 		// FIXME per ora saltiamo controllo di validità (se utente ha selezionato almento un buffet)
 		if(bean != null) {
 			model.addAttribute("buffets", buffService.deletePerId(bean.getBuffetIds()));
-			return "confermaEliminazione.html";				
+			return "confermaEliminazioneBuffet.html";				
 		}
 		return "eliminaBuffetForm";
 	}

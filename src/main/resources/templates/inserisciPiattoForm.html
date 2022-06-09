@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+ <link rel="stylesheet" href="inserisciBuffetForm.css">
+<meta name="viewport" content="width=device-width">
+<title>Inserimento buffet</title>
+</head>
+<body>
+	<h4>Inserisci i dati del buffet che vuoi aggiungere:</h4>
+	<form th:action="@{/inserisciPiatto}" method="post" th:object="${piatto}">
+	<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore globale</p>
+		</div>
+		<div>
+			<label>Nome: </label> <input type="text" th:field="*{nome}" />
+		</div>
+		<div>
+			<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+		</div>
+		<br>
+		<div>
+			<label>Descrizione: </label> <input type="text" th:field="*{descrizione}" />
+			<!-- prova con textarea -->
+		</div>
+		<div>
+			<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+		</div>
+		<br>
+		<div>
+			<label>Ingredienti disponibili: </label>
+			<div th:each="ingrediente : ${allIngredienti}">
+				<input type="checkbox" th:name="'ingrediente' + ${ingrediente.id}" th:value="${ingrediente.id}" th:field="*{ingredienti}" /> 
+				<label th:for="'ingrediente' + ${ingrediente.id}" th:text="${ingrediente.nome}"></label>
+			</div>
+			<label> Se vuoi aggiungere un ingrediente non presente nell'elenco, puoi aggiungerlo <a href="/inserisciIngredienteForm">qui</a>.</label>
+			<div>
+				<span th:if="${#fields.hasErrors('ingredienti')}" th:errors="*{ingredienti}"></span>
+			</div>
+		</div>
+		<br>
+		<div>
+			<button type="submit">Inserisci</button>
+		</div>
+	</form>
+</body>
+</html>
