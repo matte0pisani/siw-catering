@@ -2,12 +2,9 @@ package it.uniroma3.siw.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.controller.beans.EliminaBuffetBean;
 import it.uniroma3.siw.controller.beans.InserisciBuffetBean;
-import it.uniroma3.siw.controller.validator.InserisciBuffetBeanValidator;
 import it.uniroma3.siw.model.Buffet;
 import it.uniroma3.siw.service.BuffetService;
 import it.uniroma3.siw.service.ChefService;
@@ -25,8 +21,6 @@ import it.uniroma3.siw.service.PiattoService;
 public class BuffetController {
 	@Autowired
 	private BuffetService buffService;
-	@Autowired
-	private InserisciBuffetBeanValidator beanValidator;
 	@Autowired
 	private ChefService chefService;
 	@Autowired
@@ -106,9 +100,8 @@ public class BuffetController {
 	}
 
 	@PostMapping("/inserisciBuffet")
-	public String insertBuffet(@Valid InserisciBuffetBean bean, Model model, BindingResult bindingResult) {	// @Valid inutile
-		// beanValidator.validate(bean, bindingResult);	FIXME levalo, non usato
-		if(!bindingResult.hasErrors()) {
+	public String insertBuffet(InserisciBuffetBean bean, Model model) {
+		if(!buffService.verificaEsistenzaBuffet((bean.getNome()))) {
 			Buffet buffet = new Buffet(bean.getNome(), bean.getDescrizione());
 			buffet.setChef(chefService.getChefPerId(bean.getPrimoChefId()));
 			for(Long id : bean.getPiatti()) {
