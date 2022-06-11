@@ -10,8 +10,11 @@
 	<form th:action="@{/eliminaBuffet}" method="post" th:object="${bean}">
 		<div>
 			<div th:each="buffet : ${buffets}">
-				<input type="checkbox" th:name="'buffet' + ${buffet.id}" th:value="${buffet.id}" th:field="*{buffetIds}" /> 
+				<input type="checkbox" th:name="'buffet' + ${buffet.id}" th:value="${buffet.id}" th:field="*{buffetIds}" /> <!--  FIXME passa diretto i buffet (il bean avrà una lista di buffet) -->
 				<label th:for="'buffet' + ${buffet.id}" th:text="${buffet.nome}"></label>
+			</div>
+			<div>
+				<span th:if="${#fields.hasErrors('buffetIds')}" th:text="#{NotEmpty.eliminaBuffetBean.buffetIds}"></span>	<!--  FIXME non funziona th:errors -->
 			</div>
 		</div>
 		<br>

@@ -118,12 +118,12 @@ public class BuffetController {
 	}
 
 	@PostMapping("/eliminaBuffet")
-	public String eliminaBuffet(EliminaBuffetBean bean, Model model) {
-		// FIXME per ora saltiamo controllo di validità (se utente ha selezionato almento un buffet)
-		if(bean != null) {
-			model.addAttribute("buffets", buffService.deletePerId(bean.getBuffetIds()));
+	public String eliminaBuffet(@Valid @ModelAttribute("bean") EliminaBuffetBean bean, BindingResult bindingResult, Model model) {
+		if(!bindingResult.hasErrors()) {
+			model.addAttribute("buffets", buffService.deleteTuttiBuffetConIds(bean.getBuffetIds()));
 			return "confermaEliminazioneBuffet.html";				
 		}
+		model.addAttribute("buffets", buffService.getTuttiBuffet());
 		return "eliminaBuffetForm";
 	}
 

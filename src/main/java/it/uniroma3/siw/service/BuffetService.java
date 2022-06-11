@@ -41,7 +41,7 @@ public class BuffetService {
 	}
 	
 	@Transactional
-	public List<Buffet> deletePerId(Collection<Long> ids) {	// FIXME nome più evocativo?
+	public List<Buffet> deleteTuttiBuffetConIds(Collection<Long> ids) {	// FIXME nome più evocativo?
 		List<Buffet> result = (List<Buffet>) repo.findAllById(ids);
 		repo.deleteAllById(ids);
 		return result;
