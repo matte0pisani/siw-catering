@@ -21,13 +21,13 @@ public class IngredienteController {
 	@Autowired
 	private IngredienteValidator validator;
 	
-	@GetMapping("/inserisciIngredienteForm")
+	@GetMapping("/admin/inserisciIngredienteForm")
 	public String getInserisciIngredienteForm(Model model) {
 		model.addAttribute("ingrediente", new Ingrediente());
 		return "inserisciIngredienteForm.html";
 	}
 	
-	@PostMapping("/inserisciIngrediente")
+	@PostMapping("/admin/inserisciIngrediente")
 	public String inserisciIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente, BindingResult bindingResult, Model model) {
 		validator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {

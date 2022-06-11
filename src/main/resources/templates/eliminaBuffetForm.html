@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h4>Selezione i buffet che vuoi rimuovere:</h4>
-	<form th:action="@{/eliminaBuffet}" method="post" th:object="${bean}">
+	<form th:action="@{/admin/eliminaBuffet}" method="post" th:object="${bean}">
 		<div>
 			<div th:each="buffet : ${buffets}">
 				<input type="checkbox" th:name="'buffet' + ${buffet.id}" th:value="${buffet.id}" th:field="*{buffetIds}" /> <!--  FIXME passa diretto i buffet (il bean avrà una lista di buffet) -->

@@ -10,11 +10,10 @@
 		<h1>Servizio Catering EXPRESS</h1>
 		<div>
 			<a href="/">home</a>
-			<a th:href="@{/allBuffets}">i nostri buffet</a>
-			<a th:href="@{/allChefs}">i nostri chef</a>
+			<a th:href="@{/buffet/all}">i nostri buffet</a>
+			<a th:href="@{/chef/all}">i nostri chef</a>
 			<a href="">chi siamo</a>	<!-- FIXME -->
-			<a href="">accedi</a>		<!-- FIXME -->
-			<a th:href="@{/getAmministratorePage}">area amministratore</a>
+			<a th:href="@{/admin/getAmministratorePage}">area amministratore</a>
 		</div>
 		<div>
 			<h2>Il tuo evento, con gusto!</h2>
@@ -28,7 +27,7 @@
 			<div>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam molestie non erat eget blandit. Sed euismod vestibulum cursus. Cras dictum felis leo, id cursus enim ornare rutrum!
 			</div>
-			<a th:href="@{/allBuffets}">Visualizza tutti i buffet</a>
+			<a th:href="@{/buffet/all}">Visualizza tutti i buffet</a>
 		</div>
 		<div>
 			<h3>Comincia ad esplorare</h3>
@@ -36,7 +35,7 @@
 				Hai già qualcosa in mente, o vorresti provare un buffet di uno chef che ti ha soddisfatto in passato? Prova il nostro strumento di ricerca
 				avanzata.
 			</div>
-			<a th:href="@{/cercaBuffetForm}">Cerca un buffet</a>
+			<a th:href="@{/buffet/cerca}">Cerca un buffet</a>
 		</div>
 	</div>
 </body>

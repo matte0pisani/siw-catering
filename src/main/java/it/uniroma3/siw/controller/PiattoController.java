@@ -31,14 +31,14 @@ public class PiattoController {
 		return "piatto.html";
 	}
 	
-	@GetMapping("/inserisciPiattoForm")
+	@GetMapping("/admin/inserisciPiattoForm")
 	public String getInserisciPiattoForm(Model model) {
 		model.addAttribute("piatto", new Piatto());
 		model.addAttribute("allIngredienti", ingredienteService.getTuttiIngredienti());
 		return "inserisciPiattoForm.html";
 	}
 	
-	@PostMapping("/inserisciPiatto")
+	@PostMapping("/admin/inserisciPiatto")
 	public String inserisciPiatto(@Valid @ModelAttribute("piatto") Piatto piatto, BindingResult bindingResult, Model model) {
 		piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {

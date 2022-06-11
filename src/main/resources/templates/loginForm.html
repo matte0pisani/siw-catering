@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<div>
+		<h3>Login</h3>
+	</div>
+	<h4>
+		Autenticati come amministratore per procedere all'area riservata.
+	</h4>
+	<form th:action="@{/login}" method="POST">
+		<div>
+			<div>
+				<span>Username:</span>
+				<span><input name="username" type="text" /></span>
+			</div>		
+			<div>
+				<span>Password:</span>
+				<span><input name="password" type="password" /></span>
+			</div>
+			<div>
+				<span><button type="submit">Login</button></span>
+			</div>
+			<div> Non hai un account?
+			<a th:href="@{/register}">Registrati</a>		
+		</div>
+		</div>
+	</form>
+   
+</body>
+</html>

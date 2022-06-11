@@ -32,12 +32,12 @@ public class BuffetController {
 	@Autowired
 	private PiattoService piattoService;
 
-	@GetMapping("/cercaBuffetForm")
+	@GetMapping("/buffet/cerca")
 	public String getCercaBuffetForm(Model model) {
 		return "cercaBuffetForm.html";
 	}
 
-	@GetMapping("/inserisciBuffetForm")
+	@GetMapping("/admin/inserisciBuffetForm")
 	public String getInserisciBuffetForm(Model model) {
 		model.addAttribute("buffet", new Buffet());
 		model.addAttribute("allChefs", chefService.getTuttiChef());
@@ -45,20 +45,20 @@ public class BuffetController {
 		return "inserisciBuffetForm.html";
 	}
 
-	@GetMapping("/eliminaBuffetForm")
+	@GetMapping("/admin/eliminaBuffetForm")
 	public String getEliminaBuffetForm(Model model) {
 		model.addAttribute("bean", new EliminaBuffetBean());
 		model.addAttribute("buffets", buffService.getTuttiBuffet());
 		return "eliminaBuffetForm.html";
 	}
 
-	@GetMapping("/allBuffets")
+	@GetMapping("/buffet/all")
 	public String getTuttiBuffet(Model model) {
 		model.addAttribute("buffets", buffService.getTuttiBuffet());
 		return "buffets.html";
 	}
 
-	@GetMapping("/buffet")
+	@GetMapping("/buffet/nome")
 	public String getBuffetByNome(@RequestParam(name = "nome") String nome, Model model) {
 		if(!(nome == null || nome.isBlank())) {
 			Buffet buffet = buffService.getBuffetPerNome(nome);
@@ -85,7 +85,7 @@ public class BuffetController {
 		return "buffet.html";
 	}
 
-	@GetMapping("/buffets")
+	@GetMapping("/buffet/chef")
 	public String getBuffetsByChef(@RequestParam(name = "nomeCognome") String nomeCognome, Model model) {
 		if(nomeCognome != null && !nomeCognome.isBlank()) {
 			List<Buffet> buffets = buffService.getTuttiBuffetPerNomeChef(nomeCognome);
@@ -105,7 +105,7 @@ public class BuffetController {
 		}
 	}
 
-	@PostMapping("/inserisciBuffet")
+	@PostMapping("/admin/inserisciBuffet")
 	public String insertBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, BindingResult bindingResult, Model model) {
 		buffValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
@@ -117,7 +117,7 @@ public class BuffetController {
 		return "inserisciBuffetForm.html";
 	}
 
-	@PostMapping("/eliminaBuffet")
+	@PostMapping("/admin/eliminaBuffet")
 	public String eliminaBuffet(@Valid @ModelAttribute("bean") EliminaBuffetBean bean, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			model.addAttribute("buffets", buffService.deleteTuttiBuffetConIds(bean.getBuffetIds()));
@@ -128,7 +128,7 @@ public class BuffetController {
 	}
 
 	// FIXME temporaneo
-	@GetMapping("/getAmministratorePage") 
+	@GetMapping("/admin/getAmministratorePage") 
 	public String getAmministratorePage(Model model) {
 		return "amministratore";
 	}

@@ -22,13 +22,13 @@ public class ChefController {
 	@Autowired
 	private ChefValidator validator;
 	
-	@GetMapping("/inserisciChefForm")
+	@GetMapping("/admin/inserisciChefForm")
 	public String getInserisciChefForm(Model model) {
 		model.addAttribute("chef", new Chef());
 		return "inserisciChefForm.html";
 	}
 	
-	@GetMapping("/allChefs")
+	@GetMapping("/chef/all")
 	public String getTuttiChef(Model model) {
 		model.addAttribute("chefs", service.getTuttiChef());
 		return "chefs.html";
@@ -40,7 +40,7 @@ public class ChefController {
 		return "chef.html";
 	}
 	
-	@PostMapping("/inserisciChef")
+	@PostMapping("/admin/inserisciChef")
 	public String inserisciChef(@Valid @ModelAttribute("chef") Chef chef, BindingResult bindingResult, Model model) {
 		validator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {

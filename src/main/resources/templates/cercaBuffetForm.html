@@ -7,7 +7,7 @@
 <title>Cerca buffet</title>
 </head>
 <body>
-	<form th:action="@{/buffet}" method="get">
+	<form th:action="@{/buffet/nome}" method="get">
 		<h4>Inserisci il nome del buffet che stai cercando:</h4>
 		<div>
 			<input type="text" name="nome" />
@@ -20,7 +20,7 @@
 		</div>
 	</form>
 	
-	<form th:action="@{/buffets}" method="get">
+	<form th:action="@{/buffet/chef}" method="get">
 		<h4>Oppure inserisci il nome e il cognome di uno chef per visualizzare i suoi buffet:</h4>
 		<div>
 			<input type="text" name="nomeCognome" />
