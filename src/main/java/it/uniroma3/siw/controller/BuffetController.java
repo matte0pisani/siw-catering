@@ -2,16 +2,20 @@ package it.uniroma3.siw.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.controller.beans.EliminaBuffetBean;
-import it.uniroma3.siw.controller.beans.InserisciBuffetBean;
+import it.uniroma3.siw.controller.validator.BuffetValidator;
 import it.uniroma3.siw.model.Buffet;
 import it.uniroma3.siw.service.BuffetService;
 import it.uniroma3.siw.service.ChefService;
@@ -21,6 +25,8 @@ import it.uniroma3.siw.service.PiattoService;
 public class BuffetController {
 	@Autowired
 	private BuffetService buffService;
+	@Autowired
+	private BuffetValidator buffValidator;
 	@Autowired
 	private ChefService chefService;
 	@Autowired
@@ -33,9 +39,9 @@ public class BuffetController {
 
 	@GetMapping("/inserisciBuffetForm")
 	public String getInserisciBuffetForm(Model model) {
-		model.addAttribute("bean", new InserisciBuffetBean());
-		model.addAttribute("chefs", chefService.getTuttiChef());
-		model.addAttribute("piatti", piattoService.getTuttiPiatti());
+		model.addAttribute("buffet", new Buffet());
+		model.addAttribute("allChefs", chefService.getTuttiChef());
+		model.addAttribute("allPiatti", piattoService.getTuttiPiatti());
 		return "inserisciBuffetForm.html";
 	}
 
@@ -89,7 +95,7 @@ public class BuffetController {
 				return "buffets.html";
 			}
 			else {
-				model.addAttribute("isBuffetsInesistenti", true);
+				model.addAttribute("isBuffetsInesistenti", true); 	
 				return "cercaBuffetForm";
 			}
 		}
@@ -100,19 +106,15 @@ public class BuffetController {
 	}
 
 	@PostMapping("/inserisciBuffet")
-	public String insertBuffet(InserisciBuffetBean bean, Model model) {
-		if(!buffService.verificaEsistenzaBuffet((bean.getNome()))) {
-			Buffet buffet = new Buffet(bean.getNome(), bean.getDescrizione());
-			buffet.setChef(chefService.getChefPerId(bean.getPrimoChefId()));
-			for(Long id : bean.getPiatti()) {
-				buffet.addPiatto(piattoService.getPiattoPerId(id));
-			}
-			model.addAttribute("buffet", buffet);
+	public String insertBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, BindingResult bindingResult, Model model) {
+		buffValidator.validate(buffet, bindingResult);
+		if(!bindingResult.hasErrors()) {
 			buffService.save(buffet);
-			return "confermaInserimentoBuffet.html";
+			return "confermaInserimentoBuffet";
 		}
-		model.addAttribute("duplicato", true);
-		return "error.html";
+		model.addAttribute("allChefs", chefService.getTuttiChef());
+		model.addAttribute("allPiatti", piattoService.getTuttiPiatti());
+		return "inserisciBuffetForm.html";
 	}
 
 	@PostMapping("/eliminaBuffet")

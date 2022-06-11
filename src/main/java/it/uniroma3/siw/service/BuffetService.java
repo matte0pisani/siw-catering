@@ -14,10 +14,6 @@ import it.uniroma3.siw.repository.BuffetRepository;
 public class BuffetService {	
 	@Autowired
 	private BuffetRepository repo;
-	
-	public boolean verificaEsistenzaBuffet(String nome) {
-		return getBuffetPerNome(nome) != null;
-	}
 
 	public Buffet getBuffetPerId(Long id) {
 		return repo.findById(id).get();
@@ -39,7 +35,6 @@ public class BuffetService {
 		return (List<Buffet>) repo.findAll();
 	}
 
-
 	@Transactional
 	public void save(Buffet buffet) {
 		repo.save(buffet);
@@ -52,5 +47,9 @@ public class BuffetService {
 		return result;
 	}
 	// eventuale versione sovraccarica potrebbe essere utile
-
+	
+	public boolean verificaEsistenzaBuffet(String nome) {
+		return getBuffetPerNome(nome) != null;
+	}
+	
 }
