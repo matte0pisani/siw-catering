@@ -25,6 +25,7 @@ public class Buffet {
 	@NotBlank
 	private String nome;
 	
+	@NotBlank
 	@Column(length = 512)
 	private String descrizione;
 	

@@ -11,7 +11,7 @@
 		<h4>Inserisci il nome del buffet che stai cercando:</h4>
 		<div>
 			<input type="text" name="nome" />
-			<div class="error" th:if="${isNomeBlank}" th:text="#{NotBlank}"></div>
+			<div class="error" th:if="${isNomeBlank}" >Il campo non può essere vuoto</div> <!--  FIXME -->
 			<div class="error" th:if="${isBuffetInesistente}" th:text="#{buffet.inesistente}"></div>
 		</div>
 		<br>
@@ -24,7 +24,7 @@
 		<h4>Oppure inserisci il nome e il cognome di uno chef per visualizzare i suoi buffet:</h4>
 		<div>
 			<input type="text" name="nomeCognome" />
-			<div class="error" th:if="${isNomeCognomeBlank}" th:text="#{NotBlank}"></div>
+			<div class="error" th:if="${isNomeCognomeBlank}">Il campo non può essere vuoto</div>
 			<div class="error" th:if="${isBuffetsInesistenti}" th:text="#{buffet.inesistenti}"></div>
 		</div>
 		<br>
@@ -32,5 +32,8 @@
 			<button type="submit">Cerca</button>
 		</div>
 	</form>
+	<footer>
+		<a href="/">Torna alla homepage</a>
+	</footer>
 </body>
 </html>
