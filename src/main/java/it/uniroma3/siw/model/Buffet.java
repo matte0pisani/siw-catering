@@ -35,7 +35,7 @@ public class Buffet {
 	
 	@NotEmpty
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Piatto> piatti;	// FIXME sarebbe meglio mappa
+	private List<Piatto> piatti;
 	
 	public Buffet(String nome, String descrizione) {
 		this.nome = nome;
