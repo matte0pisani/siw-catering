@@ -1,0 +1,163 @@
+:root {
+  --primary-color: #4c6a78;
+  --secondary-color: #b2bcbb;
+  --background: #f8f8f8;
+  --title-style: 'Yanone Kaffeesatz', sans-serif;
+  --normal-style: 'Montserrat', sans-serif;
+}
+
+* {
+	font-family: var(--normal-style);
+	color: var(--primary-color);
+}
+
+body {
+	background-color: var(--background);
+	margin: 0;
+}
+
+
+.title {
+	font-family: var(--title-style);
+	font-size: 4em;
+	font-weight: bold;
+}
+
+.subtitle {
+	font-family: var(--title-style);
+	font-size: 3em;
+	font-weight: bold;
+}
+
+.centered {
+	text-align: center;
+	padding: 0 60px 0 60px;
+}
+
+#navbar {
+	background-color: var(--secondary-color);
+	width: 100%;
+	opacity: 0.9;
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#logo {
+	border-radius: 50%;
+	width: 5rem;
+	opacity: 0.8;
+}
+
+#logo:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  opacity: 1;
+}
+
+.navbar-element {
+	color: var(--background);
+	font-size: 2em;
+	text-decoration: none;	
+}
+
+.navbar-element:hover {
+	text-decoration: underline;
+	font-style: italic;
+}
+
+#first-header {
+	background-image: url(../images/buffet-1.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+  	background-size: cover;
+  	background-size: 100% 100%;
+  	
+  	margin: 0px;
+  	padding: 0;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#header-title {
+	color: var(--background);
+	padding: 10% 5% 5% 5%;
+	border-bottom: 2px solid var(--background);
+}
+
+#header-text {
+	color: var(--background);
+	font-size: xx-large;
+	font-style: italic;
+	
+	padding: 0 25% 25% 25%;
+}
+
+article {
+	margin : 5% 1%;
+}
+
+#article-title {
+	border-bottom: 2px solid black;
+	margin-bottom: 0.25em;
+}
+
+.square {
+	margin : 5% 1% 5% 1%;
+	border-style: double;
+	border-color: white;
+	border-width: thick;
+	padding: 3%;
+	
+	background-image: url(../images/pattern-10.webp);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+  	background-size: cover;
+	
+	display: flex;
+	gap: 4%;
+}
+
+.square-content {
+	margin: 2em;
+	font-weight: bold;
+}
+
+.square-picture {
+	box-shadow: 10px -10px 0px var(--background);
+	border: solid;
+	border-color: var(--secondary-color);
+}
+
+.square-button {
+	margin-top: 2%;
+	border-color: var(--primary-color);
+	background-color: var(--background);
+	font-size: medium;
+}
+
+.square-button:hover {
+	background-color: var(--primary-color);
+	color: var(--background)
+}
+
+footer {
+	margin-top: 10%;
+	background-color: var(--secondary-color);
+	
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer-content {
+	margin: 2%;
+	display: flex;
+	flex-direction: column;
+}
