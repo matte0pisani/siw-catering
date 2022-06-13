@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width">
-<title>I nostri buffet</title>	<!-- FIXME prova a rimettere titolo variabile -->
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='I nostri buffet')"></head>
 <body>
-	<div>
-	<h4 th:if="${chef}" th:text="'I buffet di ' + ${chef} + ':'">I buffet dello chef:</h4>
-	<h4 th:unless="${chef}">Le nostre proposte:</h4>
-	</div>
-	<div>
-	<ul>
-		<li th:each="buffet : ${buffets}">
-			<div>
-				<a th:href="@{'/buffet' + '/' + ${buffet.id}}" th:text="${buffet.nome}">buffet_nome</a>
+	<div >
+		<nav th:replace="fragments/layout.html :: navbar"></nav>
+		<div class="container-for-space">
+			<div class="subtitle bottom-border centered" th:if="${chef}" th:text="'I buffet di ' + ${chef} + ':'">I buffet dello chef:</div>
+			<div class="subtitle bottom-border centered	" th:unless="${chef}">LE NOSTRE PROPOSTE, DI QUALIT&Agrave;</div>
+			<section>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non justo odio.
+				Nulla aliquam eleifend varius. Sed tincidunt tristique sapien, a bibendum ex maximus
+				vel. Vivamus vitae pretium nunc. In lectus orci, faucibus fringilla velit eu, 
+				ultricies maximus nisl. Nam id nibh hendrerit, suscipit nunc scelerisque, dictum
+				sapien. Suspendisse nibh lacus, semper in ex eu, consequat semper dolor. Praesent
+				blandit facilisis leo eget aliquam.
+			</section>			
+			<div class="centered">
+				<div class="side-image-content">
+					<div th:each="buffet : ${buffets}">
+						<div>
+							<a class="fancy-title" th:href="@{'/buffet' + '/' + ${buffet.id}}" th:text="${buffet.nome}">buffet_nome</a>
+						</div>
+						<div th:text="${buffet.descrizione}">Descrizione</div>
+					</div>
+				</div>
 			</div>
-			<div th:text="${buffet.descrizione}">Descrizione</div>
-		</li>
-	</ul>
+		</div>
+		<footer th:replace="fragments/layout.html :: footer"></footer>
+		<div th:replace="fragments/layout.html :: jsFiles"></div>
 	</div>
-	<footer>
-		<a href="/">Torna alla homepage</a>
-	</footer>
 </body>
 </html>

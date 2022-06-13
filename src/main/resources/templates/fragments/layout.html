@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- ================================================================================= -->
+<!-- 							HEADER FILES          								   -->
+<!-- ================================================================================= -->
+<head th:fragment="headerfiles(title)">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title th:text="${title}"></title>
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+  <!-- Custom styles -->
+  <link href="/css/style.css" rel="stylesheet" />
+  <link href="/css/style2.css" rel="stylesheet" />
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lora&family=Montserrat:wght@300&family=Tangerine:wght@400;700&family=Yanone+Kaffeesatz:wght@600&display=swap" rel="stylesheet">
+ </head>
+ 
+<!-- ============================================================================ -->
+<!-- 							HEADER                  					      -->
+<!-- ============================================================================ -->
+<nav id="navbar" th:fragment="navbar">
+	<a class="navbar-element title" th:href="@{/buffet/all}">I NOSTRI BUFFET</a>
+	<a class="navbar-element title" th:href="@{/chef/all}">I NOSTRI CHEF</a> 
+	<a href="/">
+		<img id="logo" src="../images/logo-1.jpg">
+	</a> 
+	<a class="navbar-element title" href="">CHI SIAMO</a> <!-- FIXME -->
+	<a class="navbar-element title" th:href="@{/admin/getAmministratorePage}">AREA AMMINISTRATORE</a>
+</nav>
+
+<!-- ============================================================================ -->
+<!-- 							FOOTER                  					      -->
+<!-- ============================================================================ -->
+<footer th:fragment="footer">
+	<div class="footer-content">
+	<div><b>Eder&Event Catering Srl</b></div>
+	<div>Via dei Matti, 0</div>
+	<div>info@ederevent.it</div>
+	<div>Tel. 1234567890 Fax. 09.87654321</div>
+	<div>Designed by <a href="https://it.linkedin.com/in/matteo-pisani-186413229/de?trk=people-guest_people_search-card">Matteo Pisani</a></div>			</div>
+</footer>
+
+<!-- ============================================================================ -->
+<!-- 							FILES .JS PER BOOTSTRAP    					      -->
+<!-- ============================================================================ -->
+	<div th:fragment="jsFiles">
+	  <!-- jQuery -->
+	  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	  <!-- bootstrap js -->
+	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+	</div>
+</html>
+
+
+

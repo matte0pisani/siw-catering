@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width">
-<title>I nostri chef</title>	<!-- FIXME prova a rimettere titolo variabile -->
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='I nostri chef')"></head>
 <body>
-	<div>
-	<h4>Ecco l'elenco completo dei nostri chef:</h4>
+	<div >
+		<nav th:replace="fragments/layout.html :: navbar"></nav>
+		<div class="container-for-space">
+			<div class="subtitle bottom-border centered	">I NOSTRI PROFESSIONISTI</div>
+			<section>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non justo odio.
+				Nulla aliquam eleifend varius. Sed tincidunt tristique sapien, a bibendum ex maximus
+				vel. Vivamus vitae pretium nunc. In lectus orci, faucibus fringilla velit eu, 
+				ultricies maximus nisl.
+			</section>			
+			<div class="centered">
+				<div class="side-image-content">
+					<div th:each="chef : ${chefs}">
+						<div>
+							<a class="fancy-title" th:href="@{'/chef/' + ${chef.id}}" th:text="${chef.nome} + ' ' +${chef.cognome}">chef_nome</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer th:replace="fragments/layout.html :: footer"></footer>
+		<div th:replace="fragments/layout.html :: jsFiles"></div>
 	</div>
-	<div>
-	<ul>
-		<li th:each="chef : ${chefs}">
-			<a th:href="@{'/chef/' + ${chef.id}}" th:text="${chef.nome} + ' ' +${chef.cognome}">Chef chef</a>
-		</li>
-	</ul>
-	</div>
-	<footer>
-		<a href="/">Torna alla homepage</a>
-	</footer>
 </body>
 </html>

@@ -1,0 +1,27 @@
+.container-for-space {
+	padding: 6em 1.5em 1.5em 1.5em;
+}
+
+.fancy-title {
+	font-family: 'Tangerine', cursive;
+	font-size: xx-large;
+}
+
+.fancy-title:hover {
+	color: linear-gradient(rgba(4, 9, 30, 0.1), rgba(4, 9, 30, 0.1)),;
+	text-decoration: none;
+}
+
+.side-image {
+	background-image: url(../images/back-3.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.side-image-content {
+	background: var(--background);
+	padding: 0 20% 0 20%;
+	font-style: italic;
+}
+
+

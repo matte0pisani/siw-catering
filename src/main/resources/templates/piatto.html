@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width">
-<title th:text="'Il tuo piatto: ' + ${piatto.nome}">Il tuo buffet</title>
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Il tuo piatto')"></head>
 <body>
-	<div>
-		<h4>
-			Piatto: <span th:text="${piatto.nome}"></span>
-		</h4>
-		<div>
-			<span> Descrizione: </span>
-			<span th:text="${piatto.descrizione}"></span>
-		</div>
-		<div>Ingredienti:</div>
-		<ul>
-			<li th:each="ingrediente : ${piatto.ingredienti}">
-				<div th:text="${ingrediente.nome}">
-				<!--	<a th:href="@{'/ingrediente/' + ${ingrediente.id}}" th:text="${ingrediente.nome}"></a> -->
+	<div >
+		<nav th:replace="fragments/layout.html :: navbar"></nav>
+		<div class="container-for-space">
+			<div class="subtitle bottom-border centered" th:text="'Il tuo piatto: ' + ${piatto.nome}"></div>
+			<section>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non justo odio.
+				Nulla aliquam eleifend varius.
+			</section>	
+			<div class="centered">
+				<div class="side-image-content">
+					<div th:each="ingrediente : ${piatto.ingredienti}">
+						<div>
+							<div class="fancy-title" th:text="${ingrediente.nome}">ingrediente_nome</div>
+						</div>
+						<div th:text="'Descrizione: ' + ${ingrediente.descrizione}"></div>
+						<div th:text="'Origine: ' + ${ingrediente.origine}"></div>
+					</div>
 				</div>
-				<div th:text="'Descrizione: ' + ${ingrediente.descrizione}"></div>
-				<div th:text="'Origine: ' + ${ingrediente.origine}"></div>
-			</li>
-		</ul>
+			</div>
+		</div>
+		<footer th:replace="fragments/layout.html :: footer"></footer>
+		<div th:replace="fragments/layout.html :: jsFiles"></div>
 	</div>
-	<footer>
-		<a href="/">Torna alla homepage</a>
-	</footer>
 </body>
 </html>

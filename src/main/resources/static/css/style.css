@@ -34,6 +34,11 @@ body {
 	padding: 0 60px 0 60px;
 }
 
+.bottom-border {
+	border-bottom: 2px solid var(--primary-color);
+	margin-bottom: 2%;
+}
+
 #navbar {
 	background-color: var(--secondary-color);
 	width: 100%;
@@ -67,6 +72,7 @@ body {
 }
 
 .navbar-element:hover {
+	color: var(--background);
 	text-decoration: underline;
 	font-style: italic;
 }

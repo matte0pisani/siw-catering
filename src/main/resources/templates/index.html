@@ -1,26 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8" />
-	<link rel="stylesheet" href="css/style.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lora&family=Montserrat:wght@300&family=Tangerine:wght@400;700&family=Yanone+Kaffeesatz:wght@600&display=swap" rel="stylesheet">
-	<title>Home: Servizio Catering</title>
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Home: Catering Service')"></head>
 <body>
 	<div>
-		<nav id="navbar">
-			<a class="navbar-element title" th:href="@{/buffet/all}">I NOSTRI BUFFET</a>
-			<a class="navbar-element title" th:href="@{/chef/all}">I NOSTRI CHEF</a> 
-			<a href="/">
-				<img id="logo" src="images/logo-1.jpg">
-			</a> 
-			<a class="navbar-element title" href="">CHI SIAMO</a> <!-- FIXME -->
-			<a class="navbar-element title" th:href="@{/admin/getAmministratorePage}">AREA AMMINISTRATORE</a>
-		</nav>
+		<nav th:replace="fragments/layout.html :: navbar"></nav>
 		<header id="first-header">
-			<div id="header-title" class="title">CATERING DI ECCELLENZA NELLA CITTÀ ETERNA</div>
+			<div id="header-title" class="title">CATERING DI ECCELLENZA NELLA CITTA' ETERNA</div>
 			<p id="header-text">
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 				Etiam molestie non erat eget blandit. Sed euismod vestibulum cursus.
@@ -34,21 +19,21 @@
 				<div class="subtitle">Il tuo evento, con gusto!</div>
 			</div>
 			<p class="centered">
-				Eder&Event Catering aiuta i suoi clienti a organizzare eventi di alta qualità da <b>oltre 20 anni</b>. Il nostro team di catering per 
-				eventi a Roma ha una chiara comprensione di ciò che serve per rendere il tuo evento un <b>successo</b>.<br>
-				La varietà di deliziosi piatti di cibo disponibili è limitata solo alle tue preferenze. I nostri menu ed eventi sono personalizzati 
+				Eder&Event Catering aiuta i suoi clienti a organizzare eventi di alta qualit&agrave; da <b>oltre 20 anni</b>. Il nostro team di catering per 
+				eventi a Roma ha una chiara comprensione di ci&ograve; che serve per rendere il tuo evento un <b>successo</b>.<br>
+				La variet&agrave; di deliziosi piatti di cibo disponibili &egrave; limitata solo alle tue preferenze. I nostri menu ed eventi sono personalizzati 
 				in base allo stile e al tipo di evento che desideri ospitare. Con menu disponibili per matrimoni, feste d'ufficio e di Natale, eventi 
 				aziendali e molto altro. Contatta il nostro servizio di catering leader a Roma per iniziare.
-				<br>Il nostro catering situato a Roma offre soltanto prodotti che rappresentano appieno la qualità e la freschezza senza dimenticare 
-				di avere sempre <b>un occhio di riguardo verso la sostenibilità</b>. <br>
-				Ogni evento sia esso piccolo che grande, verrà realizzato da un'alta cucina che predilige prodotti tipici del Lazio ed 
+				<br>Il nostro catering situato a Roma offre soltanto prodotti che rappresentano appieno la qualit&agrave; e la freschezza senza dimenticare 
+				di avere sempre <b>un occhio di riguardo verso la sostenibilit&agrave;</b>. <br>
+				Ogni evento sia esso piccolo che grande, verr&agrave; realizzato da un'alta cucina che predilige prodotti tipici del Lazio ed 
 				alimenti derivanti da aziende 100% italiane. <br>
-				Il nostro obiettivo infatti è anche quello di <b>contribuire ad aiutare le imprese locali </b>scegliendo alimenti a chilometro zero e 
-				fornendo dei menù davvero variegati a seconda di ogni esigenza.
+				Il nostro obiettivo infatti &egrave; anche quello di <b>contribuire ad aiutare le imprese locali </b>scegliendo alimenti a chilometro zero e 
+				fornendo dei men&ugrave; davvero variegati a seconda di ogni esigenza.
 			</p>
 		</article>
 		<section class="square">
-			<img class="square-picture" src="../images/piatto-1.jpg" width="20%">
+			<img class="square-picture" src="../images/piatto-2.jpg" width="20%">
 			<div class="square-content">
 				<div class="subtitle">Una vasta gamma di scelta</div>
 				<div>
@@ -60,12 +45,11 @@
 				</div>
 			</div>
 		</section>
-		
 		<section class="square">
 			<div class="square-content">
 				<div class="subtitle">Comincia ad esplorare</div>
 				<div>
-					Hai già qualcosa in mente, o vorresti provare un buffet di
+					Hai gi&agrave; qualcosa in mente, o vorresti provare un buffet di
 					uno chef che ti ha soddisfatto in passato? Prova il nostro strumento
 					di ricerca avanzata.<br>
 					<a th:href="@{/buffet/cerca}">
@@ -76,15 +60,8 @@
 			<img class="square-picture" src="../images/chef-1.jpg" width="20%">
 		</section>
 		
-		<footer>
-			<div class="footer-content">
-				<div><b>Eder&Event Catering Srl</b></div>
-				<div>Via dei Matti, 0</div>
-				<div>info@ederevent.it</div>
-				<div>Tel. 1234567890 Fax. 09.87654321</div>
-				<div>Designed by <a href="https://it.linkedin.com/in/matteo-pisani-186413229/de?trk=people-guest_people_search-card">Matteo Pisani</a></div>
-			</div>
-		</footer>
+		<footer th:replace="fragments/layout.html :: footer"></footer>
+		<div th:replace="fragments/layout.html :: jsFiles"></div>
 	</div>
 </body>
 </html>

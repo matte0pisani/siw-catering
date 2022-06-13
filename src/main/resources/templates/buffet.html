@@ -1,35 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width">
-<title th:text="'Il tuo buffet: ' + ${buffet.nome}">Il tuo buffet</title>
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Il tuo buffet')"></head>
 <body>
-	<div>
-		<h4>
-			Buffet <span th:text="${buffet.nome}"></span>
-		</h4>
-		<div>
-			<span> Descrizione: </span>
-			<span th:text="${buffet.descrizione}"></span>
-		</div>
-		<div>
-			<span> Chef: </span>
-			<a th:href="@{'/chef/' + ${buffet.chef.id}}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></a>
-		</div>
-		<div>Piatti:</div>
-		<ul>
-			<li th:each="piatto : ${buffet.piatti}">
-				<div>
-					<a th:href="@{'/piatto/' + ${piatto.id}}" th:text="${piatto.nome}"></a>
+	<div >
+		<nav th:replace="fragments/layout.html :: navbar"></nav>
+		<div class="container-for-space">
+			<div class="subtitle bottom-border centered" th:text="'Buffet ' + ${buffet.nome}"></div>
+			<section th:text="${buffet.descrizione}"></section>	
+			<div>
+				<span> Chef: </span>
+				<a class="fancy-title" th:href="@{'/chef/' + ${buffet.chef.id}}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></a>
+			</div>		
+			<div class="centered">
+				<div class="side-image-content">
+					<div th:each="piatto : ${buffet.piatti}">
+						<div>
+							<a class="fancy-title" th:href="@{'/piatto/' + ${piatto.id}}" th:text="${piatto.nome}">piatto_nome</a>
+						</div>
+						<div th:text="${piatto.descrizione}"></div>
+					</div>
 				</div>
-				<div th:text="${piatto.descrizione}"></div>
-			</li>
-		</ul>
+			</div>
+		</div>
+		<footer th:replace="fragments/layout.html :: footer"></footer>
+		<div th:replace="fragments/layout.html :: jsFiles"></div>
 	</div>
-	<footer>
-		<a href="/">Torna alla homepage</a>
-	</footer>
 </body>
 </html>
