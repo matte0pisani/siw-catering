@@ -6,21 +6,20 @@
 	<div class="container-for-space">
 		<div class="title bottom-border">LOGIN</div>
 		<div class="subtitle"> Autenticati come amministratore per procedere all'area riservata.</div>
-		<form class="form-container" th:action="@{/login}" method="POST">
-			<div>
-				<div>Username:</div>
+		<form th:action="@{/login}" method="POST">
+			<div class="form-content">
+				Username: <input name="username" type="text" placeholder="inserisci username qui..."/>
 				<br/>
-				<div>Password:</div>
-			</div>		
-			<div>
-				<div><input name="username" type="text" /></div>
-				<br/>
-				<div><input name="password" type="password" /></div>
+				Password: <input name="password" type="password" placeholder="inserisci password qui..."/>
 			</div>
+			<br/>
 			<div>
 				<button class="square-button" type="submit">Login</button>
 			</div>
 		</form>
+		<br/>
+		<div class="error" th:if="${error}" th:text="#{login.error}">errore autenticazione</div>
+		<br>
 		<div> Non hai un account?
 			<a th:href="@{/register}">Registrati</a>.	
 		</div>

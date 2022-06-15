@@ -45,9 +45,11 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 // la pagina di login si trova a /login
                 // NOTA: Spring gestisce il post di login automaticamente
-                .loginPage("/login")
+                .loginPage("/login").permitAll()
                 // se il login ha successo, si viene rediretti al path /default
                 .defaultSuccessUrl("/default")
+                // se il login non ha successo?
+                .failureUrl("/login-failed")
 
                 // logout paragraph: qui definiamo il logout
                 .and().logout()
