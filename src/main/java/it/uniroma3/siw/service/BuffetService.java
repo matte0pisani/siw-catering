@@ -44,12 +44,19 @@ public class BuffetService {
 	}
 
 	@Transactional
-	public List<Buffet> deleteTuttiBuffetConIds(Collection<Long> ids) {	// FIXME nome più evocativo?
+	public List<Buffet> rimuoviTuttiBuffetConIds(Collection<Long> ids) {	// FIXME nome più evocativo?
 		List<Buffet> result = (List<Buffet>) repo.findAllById(ids);
 		repo.deleteAllById(ids);
 		return result;
 	}
-	// eventuale versione sovraccarica potrebbe essere utile
+
+	@Transactional
+	public Buffet rimuoviBuffet(Long id) {
+		Buffet result = repo.findById(id).get();
+		repo.deleteById(id);
+		return result;
+	}
+	
 
 	public boolean verificaEsistenzaBuffet(String nome) {
 		return getBuffetPerNome(nome) != null;

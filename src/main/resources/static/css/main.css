@@ -22,6 +22,7 @@ body {
 
 em, span {
 	font-family: inherit;
+	color: inherit;
 }
 
 .title {
@@ -58,6 +59,11 @@ em, span {
 
 .error {
 	color: red;
+	font-weight: bold;
+}
+
+.success {
+	color: green;
 	font-weight: bold;
 }
 

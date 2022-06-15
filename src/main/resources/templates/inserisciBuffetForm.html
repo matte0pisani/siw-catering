@@ -9,41 +9,30 @@
 		
 		<form class="form-content" th:action="@{/admin/inserisciBuffet}" method="post" th:object="${buffet}">
 			<div th:if="${#fields.hasGlobalErrors()}">
-				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore globale</p>
+				<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore globale</p>
 			</div>
-			<b>Nome: </b> 
+			<b>Nome: <span class="error"	 th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span></b> 
 			<input type="text" th:field="*{nome}" />
-			<div>
-				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-			</div>
 			<br>
-				<b>Descrizione: </b> 
+				<b>Descrizione: <span class="error" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span></b> 
 				<input type="text" th:field="*{descrizione}" />
-				<div>
-					<span th:if="${#fields.hasErrors('descrizione')}"
-						th:errors="*{descrizione}"></span>
-				</div>
 			<br>
-			<b>Chef disponibili: </b>
-			<div>
-				<span th:if="${#fields.hasErrors('chef')}" th:errors="*{chef}"></span>
-			</div>
-			<div th:each="chef : ${allChefs}">
-				<input type="radio" th:name="'chef' + ${chef.id}"
-					th:value="${chef.id}" th:field="*{chef}" /> <label
-					th:for="'chef' + ${chef.id}"
-					th:text="${chef.nome} + ' ' + ${chef.cognome}"></label>
-			</div>
-			<label> 
-				Se vuoi aggiungere uno chef non presente nell'elenco, puoi aggiungerlo <a href="/inserisciChefForm">qui</a>.
+			
+			<label id="chef-select">
+				<b>Chef disponibili: <span class="error" th:if="${#fields.hasErrors('chef')}" th:errors="*{chef}"></span></b>
 			</label>
-
+			<select id="chef-select" name="chef">
+				<option th:each="chef : ${allChefs}" th:name="'chef' + ${chef.id}" 
+					th:value="${chef.id}" th:field="*{chef}" th:text="${chef.nome} + ' ' + ${chef.cognome}"> 
+				</option>
+			</select>
+			<div> 
+				Se vuoi aggiungere uno chef non presente nell'elenco, puoi aggiungerlo <a href="/inserisciChefForm">qui</a>.
+			</div>
 			<br>
+			
 			<div>
-				<b>Piatti disponibili: </b>
-				<div>
-					<span th:if="${#fields.hasErrors('piatti')}" th:errors="*{piatti}"></span>
-				</div>
+				<b>Piatti disponibili: <span class="error" th:if="${#fields.hasErrors('piatti')}" th:errors="*{piatti}"></span></b>
 				<div th:each="piatto : ${allPiatti}">
 					<input type="checkbox" th:name="'piatto' + ${piatto.id}"
 						th:value="${piatto.id}" th:field="*{piatti}" /> <label
@@ -54,8 +43,9 @@
 				</label>
 			</div>
 			<br>
+			
 			<div>
-				<button type="submit">Inserisci</button>
+				<button class="square-button" type="submit">Inserisci</button>
 			</div>
 		</form>
 	</div>

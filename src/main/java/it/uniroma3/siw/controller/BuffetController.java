@@ -115,11 +115,13 @@ public class BuffetController {
 	}
 
 	@PostMapping("/admin/inserisciBuffet")
-	public String insertBuffet(@Valid @ModelAttribute("buffet") Buffet buffet, BindingResult bindingResult, Model model) {
+	public String insertBuffet(@Valid @ModelAttribute("buffetNuovo") Buffet buffet, BindingResult bindingResult, Model model) {
 		buffValidator.validate(buffet, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			buffService.save(buffet);
-			return "confermaInserimentoBuffet";
+			model.addAttribute("buffets", buffService.getTuttiBuffet());
+			model.addAttribute("admin", true);
+			return "buffets.html";
 		}
 		model.addAttribute("allChefs", chefService.getTuttiChef());
 		model.addAttribute("allPiatti", piattoService.getTuttiPiatti());
@@ -129,11 +131,20 @@ public class BuffetController {
 	@PostMapping("/admin/eliminaBuffet")
 	public String eliminaBuffet(@Valid @ModelAttribute("bean") EliminaBuffetBean bean, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
-			model.addAttribute("buffets", buffService.deleteTuttiBuffetConIds(bean.getBuffetIds()));
+			model.addAttribute("buffets", buffService.rimuoviTuttiBuffetConIds(bean.getBuffetIds()));
 			return "confermaEliminazioneBuffet.html";				
 		}
 		model.addAttribute("buffets", buffService.getTuttiBuffet());
 		return "eliminaBuffetForm";
+	}
+	
+	@GetMapping("/admin/eliminaBuffet/{id}")
+	public String eliminaUnBuffet(@PathVariable("id") Long id, Model model) {
+		Buffet buffet = buffService.rimuoviBuffet(id);
+		model.addAttribute("buffetRimosso", buffet);
+		model.addAttribute("buffets", buffService.getTuttiBuffet());
+		model.addAttribute("admin", true);
+		return "buffets.html";
 	}
 
 }

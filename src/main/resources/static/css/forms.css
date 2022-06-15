@@ -49,12 +49,31 @@ input[type=text]:focus, input[type=password]:focus {
 .form-content {	
 	display: flex;
 	flex-direction: column;
-	
+
+}
+
+.form-content input[type=text] {
 	width: 20%;
 }
 
+.form-content input[type=password] {
+	width: 20%;
+}
+
+.form-content select {
+	width: 23%;
+}
+
 @media only screen and (max-width: 900px) {
-	.form-content {
+	.form-content input[type=text] {
+		width: 50%;
+	}
+	
+	.form-content input[type=password] {
+		width: 50%;
+	}
+	
+	.form-content select	 {
 		width: 50%;
 	}
 }

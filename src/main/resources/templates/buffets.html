@@ -18,10 +18,16 @@
 			</section>
 
 			<section th:unless="${chef}">
-				<span th:if="${admin}">
+				<div th:if="${admin}">
 					Gestisci i buffet in questa pagina. <b>Se vuoi inserire un nuovo buffet, clicca 
 					<a href="/admin/inserisciBuffetForm">qui</a></b>.
-				</span>
+					<div th:if="${buffetNuovo}" class="success">
+						Hai inserito un nuovo buffet: <span th:text="${buffetNuovo.nome}"></span>
+					</div>
+					<div th:if="${buffetRimosso}" class="success">
+						Hai rimosso un buffet: <span th:text="${buffetRimosso.nome}"></span>
+					</div>
+				</div>
 				<span th:unless="${admin}">
 					I nostri buffet sono
 					ottenuti utilizzando preferibilmente prodotti locali
@@ -50,7 +56,7 @@
 						<div th:if="${admin}">
 							<b>
 								<a href="">Modifica</a>
-								<a href="">Elimina</a>
+								<a th:href="@{'/admin/eliminaBuffet' + '/' + ${buffet.id}}">Elimina</a>
 							</b>
 						</div>
 					</div>
