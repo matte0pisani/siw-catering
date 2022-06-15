@@ -51,6 +51,13 @@ public class BuffetController {
 		model.addAttribute("buffets", buffService.getTuttiBuffet());
 		return "eliminaBuffetForm.html";
 	}
+	
+	@GetMapping("/admin/buffetPage")
+	public String getBuffetPage(Model model) {
+		model.addAttribute("admin", true);
+		model.addAttribute("buffets", buffService.getTuttiBuffet());
+		return "buffets.html";
+	}
 
 	@GetMapping("/buffet/all")
 	public String getTuttiBuffet(Model model) {

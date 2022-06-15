@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width">
-<title>Area amministratore</title>
-</head>
+<head
+	th:replace="fragments/layout.html :: headerfiles(title='Area amministratore')"></head>
 <body>
-	<div>
-		<h4>Area amministratore</h4>
-		<div>
-			<a href="/admin/inserisciBuffetForm">Inserisci un buffet</a>
+	<nav th:replace="fragments/layout.html :: navbar"></nav>
+	<div class="container-for-space">
+		<div class="title bottom-border extremer">
+			AREA AMMINISTRATORE
+			<a th:href="@{/logout}">
+				<button class="square-button">Logout</button>
+			</a>
 		</div>
-		<div>
-			<a href="/admin/eliminaBuffetForm">Elimina buffet</a>
-		</div>
-		<div>
-			<a href="/admin/inserisciChefForm">Inserisci uno chef</a>
-		</div>
-		<div>
-			<a href="/admin/inserisciPiattoForm">Inserisci un piatto</a>
-		</div>
-		<div>
-			<a href="/admin/inserisciIngredienteForm">Inserisci un ingrediente</a>
-		</div>
-		<div>
-			<a th:href="@{/logout}">Logout</a>
-		</div>
+		<br>	<!-- FIXME necessario per grafica; ma poi rimuoveremo quando aggiungiamo più operazioni admin -->
+		<ul>
+			<li><a href="/admin/buffetPage">Area buffet</a></li>
+			<li><a href="/admin/inserisciBuffetForm">Inserisci un buffet</a></li>
+			<li><a href="/admin/eliminaBuffetForm">Elimina buffet</a></li>
+			<li><a href="/admin/inserisciChefForm">Inserisci uno chef</a></li>
+			<li><a href="/admin/inserisciPiattoForm">Inserisci un piatto</a>
+			</li>
+			<li><a href="/admin/inserisciIngredienteForm">Inserisci un
+					ingrediente</a></li>
+		</ul>
 	</div>
-	<footer>
-		<a href="/">Torna alla homepage</a>
-	</footer>
+	<footer th:replace="fragments/layout.html :: footer"></footer>
 </body>
 </html>

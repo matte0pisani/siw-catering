@@ -20,7 +20,7 @@ body {
 	margin: 0;
 }
 
-em {
+em, span {
 	font-family: inherit;
 }
 
@@ -45,6 +45,10 @@ em {
 .centered {
 	text-align: center;
 	padding: 0 60px 0 60px;
+}
+
+.not-centered {
+	text-align: left;
 }
 
 .bottom-border {
@@ -112,4 +116,11 @@ footer {
 .two-equal-colums {
 	display: flex;
 	justify-content: space-around;
+}
+
+.extremer {
+	display: flex;
+	
+	justify-content: space-between;
+	align-items: baseline;
 }

@@ -6,10 +6,11 @@
 	<div>
 		<nav th:replace="fragments/layout.html :: navbar"></nav>
 		<div class="container-for-space">
-			<div class="subtitle bottom-border centered" th:if="${chef}"
-				th:text="'I buffet di ' + ${chef.nome} + ' ' + ${chef.cognome} + ' '">I buffet dello chef:</div>
-			<div class="subtitle bottom-border centered	" th:unless="${chef}">LE
-				NOSTRE PROPOSTE, DI QUALIT&Agrave;</div>
+			<div class="subtitle bottom-border centered" th:if="${chef}" th:text="'I buffet di ' + ${chef.nome} + ' ' + ${chef.cognome} + ' '">I buffet dello chef:</div>
+			<div th:unless="${chef}">
+				<div class="subtitle bottom-border" th:if="${admin}">AREA BUFFET</div>
+				<div class="subtitle bottom-border centered" th:unless="${admin}">LE NOSTRE PROPOSTE, DI QUALIT&Agrave;</div>
+			</div>
 			<section th:if="${chef}">
 				Ecco un elenco completo dei buffet che lo chef 
 				<span th:text="${chef.nome} + ' ' + ${chef.cognome} + ' '"></span>
@@ -17,20 +18,46 @@
 			</section>
 
 			<section th:unless="${chef}">
-				I nostri buffet sono
-				ottenuti utilizzando preferibilmente prodotti locali
-				, dall'origine controllata; sono privi di farine OO ed hanno un
-				basso contenuto di zuccheri aggiunti. Una sfida che abbiamo scelto
-				di accettare e che ha visto susseguirsi fornitori e
-				distributori schierarsi dalla nostra parte per facilitare la
-				diffusione del mangiare bene ma anche sano. In particolare, nei nostri catering
-				troverete ortaggi, frutta e uova tutte a
-				Km 0, provenienti dall'azienda "Antico Orto" di Roma; farine e prodotti 
-				derivati da frumento Senatore Cappelli (Az. Bioland BA.); olio per frittura
-				di girasole Bio; crostate prodotte con farina Senatore Cappelli e Gentil Rosso,
-				marmellate con ridotta quantit&agrave; di zuccheri raffinati.
-				</section>
-			<div class="centered">
+				<span th:if="${admin}">
+					Gestisci i buffet in questa pagina. <b>Se vuoi inserire un nuovo buffet, clicca 
+					<a href="/admin/inserisciBuffetForm">qui</a></b>.
+				</span>
+				<span th:unless="${admin}">
+					I nostri buffet sono
+					ottenuti utilizzando preferibilmente prodotti locali
+					, dall'origine controllata; sono privi di farine OO ed hanno un
+					basso contenuto di zuccheri aggiunti. Una sfida che abbiamo scelto
+					di accettare e che ha visto susseguirsi fornitori e
+					distributori schierarsi dalla nostra parte per facilitare la
+					diffusione del mangiare bene ma anche sano. In particolare, nei nostri catering
+					troverete ortaggi, frutta e uova tutte a
+					Km 0, provenienti dall'azienda "Antico Orto" di Roma; farine e prodotti 
+					derivati da frumento Senatore Cappelli (Az. Bioland BA.); olio per frittura
+					di girasole Bio; crostate prodotte con farina Senatore Cappelli e Gentil Rosso,
+					marmellate con ridotta quantit&agrave; di zuccheri raffinati.
+				</span>
+			</section>
+			
+			<div th:if="${admin}" class="admin-page-core">
+				<div class="">
+					<div th:each="buffet : ${buffets}">
+						<div>
+							<a class="subsubtitle"
+								th:href="@{'/buffet' + '/' + ${buffet.id}}"
+								th:text="${buffet.nome}">buffet_nome</a>
+						</div>
+						<div th:text="${buffet.descrizione}">Descrizione</div>
+						<div th:if="${admin}">
+							<b>
+								<a href="">Modifica</a>
+								<a href="">Elimina</a>
+							</b>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+			<div th:unless="${admin}" class="centered">
 				<div class="side-image-content">
 					<div th:each="buffet : ${buffets}">
 						<div>
@@ -39,9 +66,12 @@
 								th:text="${buffet.nome}">buffet_nome</a>
 						</div>
 						<div th:text="${buffet.descrizione}">Descrizione</div>
+						<div th:if="${admin}">
+						</div>
 					</div>
 				</div>
 			</div>
+			
 		</div>
 		<footer th:replace="fragments/layout.html :: footer"></footer>
 		<div th:replace="fragments/layout.html :: jsFiles"></div>
