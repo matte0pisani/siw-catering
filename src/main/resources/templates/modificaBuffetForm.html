@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/layout.html :: headerfiles(title='Inserisci buffet')"></head>
+<body>
+	<nav th:replace="fragments/layout.html :: navbar"></nav>
+	<div class="container-for-space">
+		<div class="subtitle bottom-border">Inserisci i dati del buffet che vuoi modificare</div>
+		<div class="">Clicca il bottone in fondo alla pagina per confermare le tue scelte.</div>
+		<div class="error" th:if="${modificaNonValida}" th:text="#{modifica.nonvalida}"></div>
+		<br>
+		
+		<form class="form-content" th:action="@{'/admin/modificaBuffet/' + ${buffet.id}}" method="post" th:object="${buffet}">
+			<b>Nome:</b> 
+			<input type="text" value="${buffet.nome}" th:field="*{nome}" />
+			<br>
+				<b>Descrizione:</b> 
+				<input type="text" value="${buffet.nome}" th:field="*{descrizione}" />
+			<br>
+			
+			<label id="chef-select">
+				<b>Chef disponibili:</b>
+			</label>
+			<select id="chef-select" name="chef">
+				<option th:name="'chef' + ${buffet.chef.id}" th:value="${buffet.chef.id}" th:field="*{chef}"
+					th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}" selected></option>
+				<option th:each="chefSel : ${allChefs}" th:name="'chef' + ${chefSel.id}" 
+					th:value="${chefSel.id}" th:field="*{chef}" th:text="${chefSel.nome} + ' ' + ${chefSel.cognome}"> 
+				</option>
+			</select>
+			<div> 
+				Se vuoi aggiungere uno chef non presente nell'elenco, puoi aggiungerlo <a href="/inserisciChefForm">qui</a>.
+			</div>
+			<br>
+			
+			<div>
+				<b>Piatti presenti nel buffet:</b>
+				<ul class="fake-form-content">
+					<li th:each="piattoOld : ${buffet.piatti}">
+						<span class="right-distance" th:text="${piattoOld.nome}"></span>
+						<a th:href="@{'/admin/rimuoviDaBuffet/' + ${buffet.id} + '/' + ${piattoOld.id}}">Rimuovi dal buffet</a>
+					</li> 
+				</ul>
+				<b>Piatti disponibili:</b>
+				<ul class="fake-form-content">
+					<li th:each="piatto : ${allPiatti}">
+						<span class="right-distance"th:text="${piatto.nome}"></span>
+						<a th:href="@{'/admin/aggiungiABuffet/' + ${buffet.id} + '/' + ${piatto.id}}">Aggiungi al buffet</a>
+					</li>
+				</ul>
+				<label> Se vuoi aggiungere un piatto non presente
+					nell'elenco, puoi aggiungerlo <a href="/inserisciPiattoForm">qui</a>.
+				</label>
+			</div>
+			<br>
+			
+			<div>
+				<button class="square-button" type="submit">Modifica</button>
+			</div>
+		</form>
+	</div>
+		<footer th:replace="fragments/layout.html :: footer"></footer>
+</body>
+</html>

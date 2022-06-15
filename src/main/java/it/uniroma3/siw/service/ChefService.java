@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.model.Buffet;
 import it.uniroma3.siw.model.Chef;
 import it.uniroma3.siw.repository.ChefRepository;
 
@@ -32,5 +33,9 @@ public class ChefService {
 	public Chef getChefPerNomeCognome(String nomeCognomeChef) {
 		String[] splitString = nomeCognomeChef.split(" ");
 		return repo.findByNomeAndCognome(splitString[0], splitString[1]);
+	}
+
+	public List<Chef> getTuttiChefMeno(Chef chef) {
+		return repo.findAllByIdNot(chef.getId());
 	}
 }

@@ -52,6 +52,15 @@ public class BuffetController {
 		return "eliminaBuffetForm.html";
 	}
 	
+	@GetMapping("/admin/modificaBuffet/{id}")
+	public String modificaBuffetForm(@PathVariable("id") Long id, Model model) {
+		Buffet buffet = buffService.getBuffetPerId(id);
+		model.addAttribute("buffet", buffet);
+		model.addAttribute("allChefs", chefService.getTuttiChefMeno(buffet.getChef()));
+		model.addAttribute("allPiatti", piattoService.getTuttiPiattiMeno(buffet.getPiatti()));
+		return "modificaBuffetForm.html";
+	}
+	
 	@GetMapping("/admin/buffetPage")
 	public String getBuffetPage(Model model) {
 		model.addAttribute("admin", true);
@@ -127,12 +136,35 @@ public class BuffetController {
 		model.addAttribute("allPiatti", piattoService.getTuttiPiatti());
 		return "inserisciBuffetForm.html";
 	}
+	
+	@PostMapping("/admin/modificaBuffet/{id}")
+	public String modificaBuffet(@PathVariable("id") Long id, @Valid Buffet buffet,
+								BindingResult bindingResult, Model model) {
+		Buffet oldBuffet = buffService.getBuffetPerId(id);
+		if(!bindingResult.hasFieldErrors("nome") && !bindingResult.hasFieldErrors("descrizione")) {
+			oldBuffet.setId(buffet.getId());
+			oldBuffet.setNome(buffet.getNome());
+			oldBuffet.setDescrizione(buffet.getDescrizione());
+			oldBuffet.setChef(buffet.getChef());
+			buffService.save(oldBuffet);
+			
+			model.addAttribute("buffetModificato", oldBuffet);
+			model.addAttribute("buffets", buffService.getTuttiBuffet());
+			model.addAttribute("admin", true);
+			return "buffets.html";
+		}
+		model.addAttribute("buffet", oldBuffet);
+		model.addAttribute("modificaNonValida", true);
+		model.addAttribute("allChefs", chefService.getTuttiChefMeno(oldBuffet.getChef()));
+		model.addAttribute("allPiatti", piattoService.getTuttiPiattiMeno(oldBuffet.getPiatti()));
+		return "modificaBuffetForm.html";
+	}
 
 	@PostMapping("/admin/eliminaBuffet")
 	public String eliminaBuffet(@Valid @ModelAttribute("bean") EliminaBuffetBean bean, BindingResult bindingResult, Model model) {
 		if(!bindingResult.hasErrors()) {
 			model.addAttribute("buffets", buffService.rimuoviTuttiBuffetConIds(bean.getBuffetIds()));
-			return "confermaEliminazioneBuffet.html";				
+			return "confermaEliminazioneBuffet.html";
 		}
 		model.addAttribute("buffets", buffService.getTuttiBuffet());
 		return "eliminaBuffetForm";

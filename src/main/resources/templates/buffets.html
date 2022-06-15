@@ -27,6 +27,9 @@
 					<div th:if="${buffetRimosso}" class="success">
 						Hai rimosso un buffet: <span th:text="${buffetRimosso.nome}"></span>
 					</div>
+					<div th:if="${buffetModificato}" class="success">
+						Hai modificato il buffet: <span th:text="${buffetModificato.nome}"></span>
+					</div>
 				</div>
 				<span th:unless="${admin}">
 					I nostri buffet sono
@@ -55,7 +58,7 @@
 						<div th:text="${buffet.descrizione}">Descrizione</div>
 						<div th:if="${admin}">
 							<b>
-								<a href="">Modifica</a>
+								<a th:href="@{'/admin/modificaBuffet' + '/' + ${buffet.id}}">Modifica</a>
 								<a th:href="@{'/admin/eliminaBuffet' + '/' + ${buffet.id}}">Elimina</a>
 							</b>
 						</div>

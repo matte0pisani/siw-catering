@@ -11,7 +11,7 @@
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore globale</p>
 			</div>
-			<b>Nome: <span class="error"	 th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span></b> 
+			<b>Nome: <span class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span></b> 
 			<input type="text" th:field="*{nome}" />
 			<br>
 				<b>Descrizione: <span class="error" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span></b> 

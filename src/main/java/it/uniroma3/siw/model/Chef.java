@@ -74,6 +74,4 @@ public class Chef {
 	public void setBuffets(List<Buffet> buffets) {
 		this.buffets = buffets;
 	}
-	
-	
 }

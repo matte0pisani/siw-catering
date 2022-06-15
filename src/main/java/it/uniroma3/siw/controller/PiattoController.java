@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.controller.validator.PiattoValidator;
+import it.uniroma3.siw.model.Buffet;
 import it.uniroma3.siw.model.Piatto;
+import it.uniroma3.siw.service.BuffetService;
 import it.uniroma3.siw.service.IngredienteService;
 import it.uniroma3.siw.service.PiattoService;
 
@@ -20,6 +22,8 @@ import it.uniroma3.siw.service.PiattoService;
 public class PiattoController {
 	@Autowired
 	private PiattoService piattoService;
+	@Autowired
+	private BuffetService buffetService;
 	@Autowired
 	private PiattoValidator piattoValidator;
 	@Autowired
@@ -47,6 +51,20 @@ public class PiattoController {
 		}
 		model.addAttribute("allIngredienti", ingredienteService.getTuttiIngredienti());
 		return "inserisciPiattoForm";
+	}
+	
+	@GetMapping("/admin/aggiungiABuffet/{idb}/{idp}")
+	public String aggiungiPiattoABuffet(@PathVariable("idb") Long idBuffet, @PathVariable("idp") Long idPiatto) {
+		Buffet buffet = buffetService.getBuffetPerId(idBuffet);
+		buffet.addPiatto(piattoService.getPiattoPerId(idPiatto));
+		buffetService.save(buffet);
+		return "redirect:/admin/modificaBuffet/" + idBuffet;
+	}
+	
+	@GetMapping("/admin/rimuoviDaBuffet/{idb}/{idp}")
+	public String rimuoviPiattoDaBuffet(@PathVariable("idb") Long idBuffet, @PathVariable("idp") Long idPiatto) {
+		piattoService.rimuoviDaBuffet(idPiatto, idBuffet);
+		return "redirect:/admin/modificaBuffet/" + idBuffet;
 	}
 
 }

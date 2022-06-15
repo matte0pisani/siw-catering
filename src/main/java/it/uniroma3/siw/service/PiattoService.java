@@ -1,5 +1,6 @@
 package it.uniroma3.siw.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,15 @@ public class PiattoService {
 	public void salva(Piatto p) {
 		repo.save(p);
 	}
+
+	public List<Piatto> getTuttiPiattiMeno(List<Piatto> piatti) {
+		List<Long> ids = new ArrayList<>();
+		for(Piatto piatto : piatti) { ids.add(piatto.getId()); }
+		return repo.findByIdNotIn(ids);
+	}
+
+	public void rimuoviDaBuffet(Long idPiatto, Long idBuffet) {
+		repo.rimuoviDaBuffet(idBuffet, idPiatto);
+	}
+
 }

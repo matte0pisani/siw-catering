@@ -103,4 +103,13 @@ public class Buffet {
 		this.piatti.add(p);
 	}
 
+	public void removePiatto(Piatto piattoPerId) {
+		this.piatti.remove(piattoPerId);		
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return this.id.equals(((Piatto) obj).getId());
+	}
+
 }
