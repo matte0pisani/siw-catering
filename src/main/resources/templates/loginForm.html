@@ -1,34 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width">
-<meta charset="UTF-8" />
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: headerfiles(title='Login')"></head>
 <body>
-	<div>
-		<h3>Login</h3>
-	</div>
-	<h4>
-		Autenticati come amministratore per procedere all'area riservata.
-	</h4>
-	<form th:action="@{/login}" method="POST">
-		<div>
+	<nav th:replace="fragments/layout.html :: navbar"></nav>
+	<div class="container-for-space">
+		<div class="title bottom-border">LOGIN</div>
+		<div class="subtitle"> Autenticati come amministratore per procedere all'area riservata.</div>
+		<form class="form-container" th:action="@{/login}" method="POST">
 			<div>
-				<span>Username:</span>
-				<span><input name="username" type="text" /></span>
+				<div>Username:</div>
+				<br/>
+				<div>Password:</div>
 			</div>		
 			<div>
-				<span>Password:</span>
-				<span><input name="password" type="password" /></span>
+				<div><input name="username" type="text" /></div>
+				<br/>
+				<div><input name="password" type="password" /></div>
 			</div>
 			<div>
-				<span><button type="submit">Login</button></span>
+				<button class="square-button" type="submit">Login</button>
 			</div>
-			<div> Non hai un account?
-			<a th:href="@{/register}">Registrati</a>		
+		</form>
+		<div> Non hai un account?
+			<a th:href="@{/register}">Registrati</a>.	
 		</div>
-		</div>
-	</form>
-   
+	</div>
+	<footer th:replace="fragments/layout.html :: footer"></footer>
 </body>
 </html>

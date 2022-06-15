@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: headerfiles(title='Il tuo piatto')"></head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Il tuo piatto: ' + ${piatto.nome})"></head>
 <body>
 	<div >
 		<nav th:replace="fragments/layout.html :: navbar"></nav>
 		<div class="container-for-space">
 			<div class="subtitle bottom-border centered" th:text="'Il tuo piatto: ' + ${piatto.nome}"></div>
-			<section>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non justo odio.
-				Nulla aliquam eleifend varius.
+			<section th:text="${piatto.descrizione}">
 			</section>	
 			<div class="centered">
 				<div class="side-image-content">

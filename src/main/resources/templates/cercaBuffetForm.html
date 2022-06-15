@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="cercaBuffet.css">
-<title>Cerca buffet</title>
-</head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Ricerca avanzata')"></head>
 <body>
-	<form th:action="@{/buffet/nome}" method="get">
-		<h4>Inserisci il nome del buffet che stai cercando:</h4>
-		<div>
-			<input type="text" name="nome" />
-			<div class="error" th:if="${isNomeBlank}" >Il campo non può essere vuoto</div> <!--  FIXME -->
-			<div class="error" th:if="${isBuffetInesistente}" th:text="#{buffet.inesistente}"></div>
+	<div>
+		<nav th:replace="fragments/layout.html :: navbar"></nav>
+		<div class="container-for-space">
+			<div class="subtitle bottom-border centered	">STRUMENTO DI RICERCA AVANZATA</div>
+			<section>
+				Utilizza il nostro strumento di ricerca avanza per ottenere subito le informazioni
+				dettagliate su un buffet o uno chef che gi&agrave; conosci. &Egrave; possibile cercare
+				un buffet per nome o visualizzare tutti i buffet di un particolare chef. In caso non
+				sia presente tale buffet, o non siano presenti buffet per lo chef indicato, non verr&agrave;
+				mostrato nulla.
+			</section>
+			
+			<div id="double-form">
+				<form th:action="@{/buffet/nome}" method="get">
+					<div class="subsubtitle"><em>Inserisci il nome del buffet che stai cercando:</em></div>
+					<div>
+						<div class="form-input-spacer">
+							<input class="with-lens" type="text" name="nome" th:value="${namePlaceholder}"/> 
+							<button class="square-button" type="submit">Cerca</button>
+						</div>
+						<div class="error" th:if="${isNomeBlank}" th:text="#{nome.vuoto}" ></div>
+						<div class="error" th:if="${isBuffetInesistente}" th:text="#{buffet.inesistente}"></div>
+					</div>
+				</form>
+				<br>
+				<form th:action="@{/buffet/chef}" method="get">
+					<div class="subsubtitle"><em>Oppure inserisci il nome e il cognome di uno chef per visualizzare i suoi buffet:</em></div>
+					<div>
+						<div class="form-input-spacer">
+							<input class="with-lens" type="text" name="nomeCognome" th:value="${chefPlaceholder}"/> 
+							<button class="square-button" type="submit">Cerca</button>
+						</div>
+						<div class="error" th:if="${isNomeCognomeBlank}" th:text="#{chef.vuoto}">Il campo non pu&ograve; essere vuoto</div>
+						<div class="error" th:if="${isBuffetsInesistenti}" th:text="#{buffet.inesistenti}"></div>
+					</div>
+				</form>
+			</div>
+			
 		</div>
-		<br>
-		<div>
-			<button type="submit">Cerca</button>
-		</div>
-	</form>
-	
-	<form th:action="@{/buffet/chef}" method="get">
-		<h4>Oppure inserisci il nome e il cognome di uno chef per visualizzare i suoi buffet:</h4>
-		<div>
-			<input type="text" name="nomeCognome" />
-			<div class="error" th:if="${isNomeCognomeBlank}">Il campo non può essere vuoto</div>
-			<div class="error" th:if="${isBuffetsInesistenti}" th:text="#{buffet.inesistenti}"></div>
-		</div>
-		<br>
-		<div>
-			<button type="submit">Cerca</button>
-		</div>
-	</form>
-	<footer>
-		<a href="/">Torna alla homepage</a>
-	</footer>
+		<footer th:replace="fragments/layout.html :: footer"></footer>
+		<div th:replace="fragments/layout.html :: jsFiles"></div>
+	</div>
 </body>
 </html>

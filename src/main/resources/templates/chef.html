@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: headerfiles(title='Il tuo chef')"></head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Il tuo chef: ' + ${chef.nome} + ' ' + ${chef.cognome})"></head>
 <body>
 	<div >
 		<nav th:replace="fragments/layout.html :: navbar"></nav>
 		<div class="container-for-space">
 			<div class="subtitle bottom-border centered" th:text="'Il tuo chef: ' + ${chef.nome} + ' ' + ${chef.cognome}"></div>
 			<section>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non justo odio.
-				Nulla aliquam eleifend varius.
+				Ecco un elenco completo dei buffet che lo chef 
+				<span th:text="${chef.nome} + ' ' + ${chef.cognome} + ' '"></span>
+				ha preparato per voi.
 			</section>	
 			<div class="centered">
 				<div class="side-image-content">

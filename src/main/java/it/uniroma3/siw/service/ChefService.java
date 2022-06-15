@@ -28,4 +28,9 @@ public class ChefService {
 	public void salva(Chef c) {
 		repo.save(c);
 	}
+
+	public Chef getChefPerNomeCognome(String nomeCognomeChef) {
+		String[] splitString = nomeCognomeChef.split(" ");
+		return repo.findByNomeAndCognome(splitString[0], splitString[1]);
+	}
 }

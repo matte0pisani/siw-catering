@@ -1,0 +1,54 @@
+/* Contiene regole di stile relative alle form e agli input */
+
+#double-form {
+	padding-top: 2.5%;
+}
+
+input[type=text], input[type=password] {
+	background-color: transparent;
+	
+	border-top: 0px;
+	border-right: 0px;
+	border-left: 0px; 
+	border-color: var(--secondary-color);
+	border-radius: 0px;
+}
+
+input[type=text]:hover, input[type=password]:hover {
+	background-color: #ffff;
+	border-color: var(--primary-color);
+}
+
+input[type=text]:focus, input[type=password]:focus {
+	background-color: white;
+	
+	outline: none;
+	border-color: var(--primary-color);
+	border-width: medium;
+}
+
+.with-lens {
+	background-image: url('../images/search-icon.png');
+	background-size: contain;
+  	background-repeat: no-repeat;
+ 	padding-left: 3%;
+ 	opacity: 0.5;
+}
+
+.with-lens:focus {
+	opacity: 1;
+}
+
+.form-input-spacer {
+	display: flex;
+	justify-content: start;
+	
+	gap: 2%;
+}
+
+.form-container {
+	padding-right: 40%;
+	
+	display: flex;
+	justify-content: space-around;
+}

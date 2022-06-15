@@ -1,3 +1,5 @@
+/* Contiene regole CSS usate soltanto nelle pagine di visualizzazione per l'utente */
+
 .container-for-space {
 	padding: 6em 1.5em 1.5em 1.5em;
 }
@@ -12,7 +14,7 @@
 	text-decoration: none;
 }
 
-.side-image {
+.side-image {	/* non utilizzata, ma mantenuta per usi futuri */
 	background-image: url(../images/back-3.jpg);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -20,8 +22,9 @@
 
 .side-image-content {
 	background: var(--background);
-	padding: 0 20% 0 20%;
+	padding: 5% 20% 0 20%;
 	font-style: italic;
+	font-size: large;
 }
 
 

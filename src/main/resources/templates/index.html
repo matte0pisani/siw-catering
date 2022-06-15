@@ -2,20 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/layout.html :: headerfiles(title='Home: Catering Service')"></head>
 <body>
-	<div>
+	<div id="fake-div">
 		<nav th:replace="fragments/layout.html :: navbar"></nav>
 		<header id="first-header">
-			<div id="header-title" class="title">CATERING DI ECCELLENZA NELLA CITTA' ETERNA</div>
+			<div id="header-title" class="title">CATERING DI ECCELLENZA NELLA CITT&Agrave; ETERNA</div>
 			<p id="header-text">
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-				Etiam molestie non erat eget blandit. Sed euismod vestibulum cursus.
-				Cras dictum felis leo, id cursus enim ornare rutrum. Ut bibendum
-				laoreet ante nec porttitor."
+				Creativit&agrave;, esperienza, professionalit&agrave; e una straordinaria capacit&agrave; di concretizzare
+				le soluzioni pi&ugrave; originali sono gli elementi che ci rendono espressione 
+				d'eccellenza nel banqueting e nel catering a Roma.
 			</p>
 		</header>
-		<article>
+		<article id="introduction">
 			<div class="centered">
-				<div id="article-title" class="title">CATERING ROMA</div>
+				<div id="article-title" class="title">EDER&EVENT CATERING</div>
 				<div class="subtitle">Il tuo evento, con gusto!</div>
 			</div>
 			<p class="centered">
@@ -35,10 +34,10 @@
 		<section class="square">
 			<img class="square-picture" src="../images/piatto-2.jpg" width="20%">
 			<div class="square-content">
-				<div class="subtitle">Una vasta gamma di scelta</div>
+				<div class="subtitle">Una vasta gamma di scelte</div>
 				<div>
 					La Eder&Event Catering di Roma dal 1992 realizza favolosi banchetti e ricevimenti in occasione di matrimoni, meeting, eventi e 
-					feste private. Grande cura degli allestimenti per i matrimoni e amplia proposta di buffet per ogni tipo di occasione<br>
+					feste private. Grande cura degli allestimenti per i matrimoni e amplia proposta di buffet per ogni tipo di occasione<br><br>
 					<a th:href="@{/buffet/all}">
 						<button class="square-button">Visualizza i nostri buffet</button>
 					</a>
@@ -51,7 +50,7 @@
 				<div>
 					Hai gi&agrave; qualcosa in mente, o vorresti provare un buffet di
 					uno chef che ti ha soddisfatto in passato? Prova il nostro strumento
-					di ricerca avanzata.<br>
+					di ricerca avanzata.<br><br>
 					<a th:href="@{/buffet/cerca}">
 						<button class="square-button">Cerca un buffet</button>
 					</a>

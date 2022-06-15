@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: headerfiles(title='Il tuo buffet')"></head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Il tuo buffet: ' + ${buffet.nome})"></head>
 <body>
 	<div >
 		<nav th:replace="fragments/layout.html :: navbar"></nav>
 		<div class="container-for-space">
-			<div class="subtitle bottom-border centered" th:text="'Buffet ' + ${buffet.nome}"></div>
+			<div class="subtitle bottom-border centered" th:text="'Il tuo buffet: ' + ${buffet.nome}"></div>
 			<section th:text="${buffet.descrizione}"></section>	
 			<div>
 				<span> Chef: </span>

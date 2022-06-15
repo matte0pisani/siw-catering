@@ -25,10 +25,13 @@ public class BuffetService {
 
 	public List<Buffet> getTuttiBuffetPerNomeChef(String nomeCognomeChef) {
 		String[] splitString = nomeCognomeChef.split(" ");
-		List<Buffet> buffets = repo.findByChefNomeAndChefCognome(splitString[0], splitString[1]);
-		if(buffets == null)
-			buffets = repo.findByChefNomeAndChefCognome(splitString[1], splitString[0]);	// FIXME non funziona, perché?
-		return buffets;
+		if(splitString.length > 1) {
+			List<Buffet> buffets = repo.findByChefNomeAndChefCognome(splitString[0], splitString[1]);
+			if(buffets == null)
+				buffets = repo.findByChefNomeAndChefCognome(splitString[1], splitString[0]);	// FIXME non funziona, perché?
+			return buffets;
+		}
+		else return null;
 	}
 
 	public List<Buffet> getTuttiBuffet() {
@@ -39,7 +42,7 @@ public class BuffetService {
 	public void save(Buffet buffet) {
 		repo.save(buffet);
 	}
-	
+
 	@Transactional
 	public List<Buffet> deleteTuttiBuffetConIds(Collection<Long> ids) {	// FIXME nome più evocativo?
 		List<Buffet> result = (List<Buffet>) repo.findAllById(ids);
@@ -47,9 +50,9 @@ public class BuffetService {
 		return result;
 	}
 	// eventuale versione sovraccarica potrebbe essere utile
-	
+
 	public boolean verificaEsistenzaBuffet(String nome) {
 		return getBuffetPerNome(nome) != null;
 	}
-	
+
 }

@@ -1,3 +1,7 @@
+/* Questo file contiene le regole di stile ad uso generale per tutte le pagine del sistema*/
+
+/* REGOLE DI USO COMUNE */
+
 :root {
   --primary-color: #4c6a78;
   --secondary-color: #b2bcbb;
@@ -16,6 +20,9 @@ body {
 	margin: 0;
 }
 
+em {
+	font-family: inherit;
+}
 
 .title {
 	font-family: var(--title-style);
@@ -29,6 +36,12 @@ body {
 	font-weight: bold;
 }
 
+.subsubtitle {
+	font-family: var(--title-style);
+	font-size: 2em;
+	font-weight: bold;
+}
+
 .centered {
 	text-align: center;
 	padding: 0 60px 0 60px;
@@ -37,6 +50,11 @@ body {
 .bottom-border {
 	border-bottom: 2px solid var(--primary-color);
 	margin-bottom: 2%;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
 }
 
 #navbar {
@@ -77,83 +95,6 @@ body {
 	font-style: italic;
 }
 
-#first-header {
-	background-image: url(../images/buffet-1.jpg);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-  	background-size: cover;
-  	background-size: 100% 100%;
-  	
-  	margin: 0px;
-  	padding: 0;
-	
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-#header-title {
-	color: var(--background);
-	padding: 10% 5% 5% 5%;
-	border-bottom: 2px solid var(--background);
-}
-
-#header-text {
-	color: var(--background);
-	font-size: xx-large;
-	font-style: italic;
-	
-	padding: 0 25% 25% 25%;
-}
-
-article {
-	margin : 5% 1%;
-}
-
-#article-title {
-	border-bottom: 2px solid black;
-	margin-bottom: 0.25em;
-}
-
-.square {
-	margin : 5% 1% 5% 1%;
-	border-style: double;
-	border-color: white;
-	border-width: thick;
-	padding: 3%;
-	
-	background-image: url(../images/pattern-10.webp);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-  	background-size: cover;
-	
-	display: flex;
-	gap: 4%;
-}
-
-.square-content {
-	margin: 2em;
-	font-weight: bold;
-}
-
-.square-picture {
-	box-shadow: 10px -10px 0px var(--background);
-	border: solid;
-	border-color: var(--secondary-color);
-}
-
-.square-button {
-	margin-top: 2%;
-	border-color: var(--primary-color);
-	background-color: var(--background);
-	font-size: medium;
-}
-
-.square-button:hover {
-	background-color: var(--primary-color);
-	color: var(--background)
-}
-
 footer {
 	margin-top: 10%;
 	background-color: var(--secondary-color);
@@ -166,4 +107,9 @@ footer {
 	margin: 2%;
 	display: flex;
 	flex-direction: column;
+}
+
+.two-equal-colums {
+	display: flex;
+	justify-content: space-around;
 }

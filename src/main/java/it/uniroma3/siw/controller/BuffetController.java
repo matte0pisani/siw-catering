@@ -69,6 +69,7 @@ public class BuffetController {
 			else {
 				// il buffet non esiste
 				model.addAttribute("isBuffetInesistente", true);
+				model.addAttribute("namePlaceholder", nome);
 				return "cercaBuffetForm.html";
 			}
 		}
@@ -91,11 +92,12 @@ public class BuffetController {
 			List<Buffet> buffets = buffService.getTuttiBuffetPerNomeChef(nomeCognome);
 			if(buffets != null && !buffets.isEmpty()) {
 				model.addAttribute("buffets", buffets);
-				model.addAttribute("chef", nomeCognome);
+				model.addAttribute("chef", chefService.getChefPerNomeCognome(nomeCognome));
 				return "buffets.html";
 			}
 			else {
-				model.addAttribute("isBuffetsInesistenti", true); 	
+				model.addAttribute("isBuffetsInesistenti", true); 
+				model.addAttribute("chefPlaceholder", nomeCognome);
 				return "cercaBuffetForm";
 			}
 		}
@@ -127,9 +129,4 @@ public class BuffetController {
 		return "eliminaBuffetForm";
 	}
 
-	// FIXME temporaneo
-	@GetMapping("/admin/getAmministratorePage") 
-	public String getAmministratorePage(Model model) {
-		return "amministratore";
-	}
 }
