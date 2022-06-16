@@ -7,6 +7,7 @@
 		<div class="container-for-space">
 			<div class="subtitle bottom-border centered" th:text="'Il tuo chef: ' + ${chef.nome} + ' ' + ${chef.cognome}"></div>
 			<section>
+				<div th:text="'Nazionalit&agrave;: ' + ${chef.nazionalita}"></div>
 				Ecco un elenco completo dei buffet che lo chef 
 				<span th:text="${chef.nome} + ' ' + ${chef.cognome} + ' '"></span>
 				ha preparato per voi.

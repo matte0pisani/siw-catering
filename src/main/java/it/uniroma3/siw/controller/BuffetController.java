@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import it.uniroma3.siw.controller.beans.EliminaBuffetBean;
 import it.uniroma3.siw.controller.validator.BuffetValidator;
 import it.uniroma3.siw.model.Buffet;
 import it.uniroma3.siw.service.BuffetService;
@@ -45,12 +43,6 @@ public class BuffetController {
 		return "inserisciBuffetForm.html";
 	}
 
-	@GetMapping("/admin/eliminaBuffetForm")
-	public String getEliminaBuffetForm(Model model) {
-		model.addAttribute("bean", new EliminaBuffetBean());
-		model.addAttribute("buffets", buffService.getTuttiBuffet());
-		return "eliminaBuffetForm.html";
-	}
 	
 	@GetMapping("/admin/modificaBuffet/{id}")
 	public String modificaBuffetForm(@PathVariable("id") Long id, Model model) {

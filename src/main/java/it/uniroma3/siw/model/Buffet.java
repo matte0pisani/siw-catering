@@ -34,7 +34,7 @@ public class Buffet {
 	private Chef chef;
 	
 	@NotEmpty
-	@ManyToMany(cascade = CascadeType.MERGE)
+	@ManyToMany
 	private List<Piatto> piatti;
 	
 	public Buffet(String nome, String descrizione) {
