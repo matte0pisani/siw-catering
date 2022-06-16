@@ -5,15 +5,51 @@
 	<div >
 		<nav th:replace="fragments/layout.html :: navbar"></nav>
 		<div class="container-for-space">
-			<div class="subtitle bottom-border centered	">I NOSTRI PROFESSIONISTI</div>
+			<div th:if="${admin}" class="subtitle bottom-border">AREA CHEF</div>
+			<div th:unless="${admin}" class="subtitle bottom-border centered">I NOSTRI PROFESSIONISTI</div>
+			
 			<section>
-				Il nostro personale &egrave; formato appositamente per gestire la preparazione di piatti
-				elaborati e gustosi in occasione di eventi anche molto affolati. Ci&ograve; che contraddistingue
-				ulteriormente i nostri chef &egrave; per&ograve; la loro cultura in ambito agroalimentare e
-				culinario, nonch&egrave; la loro esperienza internazionale. Riteniamo che sia la qualit&agrave; 
-				delle persone a darci quella marcia in pi&ugrave; che i nostri clienti ci riconoscono.
-			</section>			
-			<div class="centered">
+				<div th:if="${admin}">
+					Gestisci gli chef in questa pagina. <b>Se vuoi inserire un nuovo chef, clicca 
+					<a href="/admin/inserisciChefForm">qui</a></b>.
+					<div th:if="${chefNuovo}" class="success">
+						Hai inserito un nuovo chef: <span th:text="${chefNuovo.nome} + ' ' + ${chefNuovo.cognome}"></span>
+					</div>
+					<div th:if="${chefRimosso}" class="success">
+						Hai rimosso uno chef: <span th:text="${chefRimosso.nome} + ' ' + ${chefRimosso.cognome}"></span>
+					</div>
+					<div th:if="${chefModificato}" class="success">
+						Hai modificato lo chef: <span th:text="${chefModificato.nome} + ' ' + ${chefModificato.cognome}"></span>
+					</div>
+				</div>
+				<span th:unless="${admin}">
+					Il nostro personale &egrave; formato appositamente per gestire la preparazione di piatti
+					elaborati e gustosi in occasione di eventi anche molto affolati. Ci&ograve; che contraddistingue
+					ulteriormente i nostri chef &egrave; per&ograve; la loro cultura in ambito agroalimentare e
+					culinario, nonch&egrave; la loro esperienza internazionale. Riteniamo che sia la qualit&agrave; 
+					delle persone a darci quella marcia in pi&ugrave; che i nostri clienti ci riconoscono.
+				</span>
+			</section>
+			
+			<div th:if="${admin}" class="admin-page-core">
+				<div>
+					<div th:each="chef : ${chefs}">
+						<div>
+							<a class="subsubtitle"
+								th:href="@{'/chef' + '/' + ${chef.id}}"
+								th:text="${chef.nome} + ' ' + ${chef.cognome}">c_nome</a>
+						</div>
+						<div th:if="${admin}">
+							<b>
+								<a th:href="@{'/admin/modificaChef' + '/' + ${chef.id}}">Modifica</a>
+								<a th:href="@{'/admin/eliminaChef' + '/' + ${chef.id}}">Elimina</a>
+							</b>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+			<div th:unless="${admin}" class="centered">
 				<div class="side-image-content">
 					<div th:each="chef : ${chefs}">
 						<div>
@@ -22,9 +58,9 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
 		<footer th:replace="fragments/layout.html :: footer"></footer>
-		<div th:replace="fragments/layout.html :: jsFiles"></div>
 	</div>
 </body>
 </html>

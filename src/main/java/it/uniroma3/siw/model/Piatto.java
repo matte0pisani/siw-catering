@@ -27,7 +27,7 @@ public class Piatto {
 	
 	@NotEmpty
 	@ManyToMany
-	private List<Ingrediente> ingredienti;	// FIXME meglio mappa
+	private List<Ingrediente> ingredienti;
 
 	public Long getId() {
 		return id;

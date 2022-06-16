@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.controller.validator.IngredienteValidator;
+import it.uniroma3.siw.model.Buffet;
 import it.uniroma3.siw.model.Ingrediente;
 import it.uniroma3.siw.service.IngredienteService;
 
@@ -27,13 +29,29 @@ public class IngredienteController {
 		return "inserisciIngredienteForm.html";
 	}
 	
+	@GetMapping("/admin/ingredientiPage")
+	public String getBuffetPage(Model model) {
+		model.addAttribute("ingredienti", service.getTuttiIngredienti());
+		return "ingredienti.html";
+	}
+	
 	@PostMapping("/admin/inserisciIngrediente")
 	public String inserisciIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente, BindingResult bindingResult, Model model) {
 		validator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			service.salva(ingrediente);
-			return "confermaInserimentoIngrediente.html";
+			model.addAttribute("ingredienteNuovo", ingrediente);
+			model.addAttribute("ingredienti", service.getTuttiIngredienti());
+			return "ingredienti.html";
 		}
 		return "inserisciIngredienteForm.html"; 
+	}
+	
+	@GetMapping("/admin/eliminaIngrediente/{id}")
+	public String eliminaIngrediente(@PathVariable("id") Long id, Model model) {
+		Ingrediente ingrediente = service.rimuoviBuffet(id);
+		model.addAttribute("ingredienteRimosso", ingrediente);
+		model.addAttribute("ingredienti", service.getTuttiIngredienti());
+		return "ingredienti.html";
 	}
 }

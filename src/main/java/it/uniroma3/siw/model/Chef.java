@@ -3,6 +3,7 @@ package it.uniroma3.siw.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +27,9 @@ public class Chef {
 	private String cognome;
 	
 	@NotBlank
-	private String nazionalita;	// FIXME tipo per nazione?
+	private String nazionalita;
 	
-	@OneToMany(mappedBy = "chef")
+	@OneToMany(mappedBy = "chef", cascade = {CascadeType.REMOVE})
 	private List<Buffet> buffets;
 	
 	public Chef() {

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/layout.html :: headerfiles(title='I nostri piatti')"></head>
+<body>
+	<div>
+		<nav th:replace="fragments/layout.html :: navbar"></nav>
+		<div class="container-for-space">
+			<div class="subtitle bottom-border">AREA PIATTI</div>
+
+			<section>
+				<div>
+					Gestisci i piatti in questa pagina. <b>Se vuoi inserire un
+						nuovo piatto, clicca <a href="/admin/inserisciPiattoForm">qui</a>
+					</b>.
+					<div th:if="${piattoNuovo}" class="success">
+						Hai inserito un nuovo piatto: <span
+							th:text="${piattoNuovo.nome}"></span>
+					</div>
+					<div th:if="${piattoRimosso}" class="success">
+						Hai rimosso un piatto: <span
+							th:text="${piattoRimosso.nome}"></span>
+					</div>
+					<div th:if="${piattoModificato}" class="success">
+						Hai modificato il piatto: <span
+							th:text="${piattoModificato.nome}"></span>
+					</div>
+				</div>
+			</section>
+			
+			<div class="admin-page-core">
+				<div>
+					<div th:each="piatto : ${piatti}">
+						<div>
+							<a class="subsubtitle"
+								th:href="@{'/piatto' + '/' + ${piatto.id}}"
+								th:text="${piatto.nome}">p_nome</a>
+						</div>
+						<div th:text="${piatto.descrizione}">Descrizione</div>
+						<div>
+							<b>
+								<a th:href="@{'/admin/eliminaPiatto' + '/' + ${piatto.id}}">Elimina</a>
+							</b>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<footer th:replace="fragments/layout.html :: footer"></footer>
+		</div>
+	</div>
+</body>
+</html>

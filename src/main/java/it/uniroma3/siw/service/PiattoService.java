@@ -36,8 +36,10 @@ public class PiattoService {
 		return repo.findByIdNotIn(ids);
 	}
 
-	public void rimuoviDaBuffet(Long idPiatto, Long idBuffet) {
-		repo.rimuoviDaBuffet(idBuffet, idPiatto);
+	public Piatto rimuoviPiatto(Long id) {
+		Piatto result = repo.findById(id).get();
+		repo.deleteById(id);
+		return result;
 	}
 
 }

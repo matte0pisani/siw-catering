@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/layout.html :: headerfiles(title='I nostri ingredienti')"></head>
+<body>
+	<div>
+		<nav th:replace="fragments/layout.html :: navbar"></nav>
+		<div class="container-for-space">
+			<div class="subtitle bottom-border">AREA INGREDIENTI</div>
+
+			<section>
+				<div>
+					Gestisci i piatti in questa pagina. <b>Se vuoi inserire un
+						nuovo piatto, clicca <a href="/admin/inserisciIngredienteForm">qui</a>
+					</b>.
+					<div th:if="${ingredienteNuovo}" class="success">
+						Hai inserito un nuovo ingrediente: <span
+							th:text="${ingredienteNuovo.nome}"></span>
+					</div>
+					<div th:if="${ingredienteRimosso}" class="success">
+						Hai rimosso un ingrediente: <span
+							th:text="${ingredienteRimosso.nome}"></span>
+					</div>
+				</div>
+			</section>
+			
+			<div class="admin-page-core">
+				<div>
+					<div th:each="ingrediente : ${ingredienti}">
+						<div class="subsubtitle" th:text="${ingrediente.nome}"></div>
+						<div th:text="${ingrediente.descrizione}">Descrizione</div>
+						<div th:text="'Origine: ' + ${ingrediente.origine}"></div>
+						<div>
+							<b>
+								<a th:href="@{'/admin/eliminaIngrediente' + '/' + ${ingrediente.id}}">Elimina</a>
+							</b>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<footer th:replace="fragments/layout.html :: footer"></footer>
+	</div>
+</body>
+</html>

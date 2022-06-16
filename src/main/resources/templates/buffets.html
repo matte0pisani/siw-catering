@@ -11,6 +11,7 @@
 				<div class="subtitle bottom-border" th:if="${admin}">AREA BUFFET</div>
 				<div class="subtitle bottom-border centered" th:unless="${admin}">LE NOSTRE PROPOSTE, DI QUALIT&Agrave;</div>
 			</div>
+			
 			<section th:if="${chef}">
 				Ecco un elenco completo dei buffet che lo chef 
 				<span th:text="${chef.nome} + ' ' + ${chef.cognome} + ' '"></span>
@@ -48,7 +49,7 @@
 			</section>
 			
 			<div th:if="${admin}" class="admin-page-core">
-				<div class="">
+				<div>
 					<div th:each="buffet : ${buffets}">
 						<div>
 							<a class="subsubtitle"

@@ -1,47 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="inserisciBuffetForm.css">
-<meta name="viewport" content="width=device-width">
-<title>Inserimento buffet</title>
-</head>
+<head
+	th:replace="fragments/layout.html :: headerfiles(title='Inserisci buffet')"></head>
 <body>
-	<h4>Inserisci i dati del buffet che vuoi aggiungere:</h4>
-	<form th:action="@{/admin/inserisciPiatto}" method="post" th:object="${piatto}">
-	<div th:if="${#fields.hasGlobalErrors()}">
-			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore globale</p>
-		</div>
-		<div>
-			<label>Nome: </label> <input type="text" th:field="*{nome}" />
-		</div>
-		<div>
-			<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-		</div>
-		<br>
-		<div>
-			<label>Descrizione: </label> <input type="text" th:field="*{descrizione}" />
-			<!-- prova con textarea -->
-		</div>
-		<div>
-			<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
-		</div>
-		<br>
-		<div>
-			<label>Ingredienti disponibili: </label>
-			<div th:each="ingrediente : ${allIngredienti}">
-				<input type="checkbox" th:name="'ingrediente' + ${ingrediente.id}" th:value="${ingrediente.id}" th:field="*{ingredienti}" /> 
-				<label th:for="'ingrediente' + ${ingrediente.id}" th:text="${ingrediente.nome}"></label>
+	<nav th:replace="fragments/layout.html :: navbar"></nav>
+	<div class="container-for-space">
+		<div class="subtitle bottom-border">Inserisci i dati del buffet che vuoi aggiungere:</div>
+		
+		<form class="form-content" th:action="@{/admin/inserisciPiatto}" method="post" th:object="${piatto}">
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore globale</p>
 			</div>
-			<label> Se vuoi aggiungere un ingrediente non presente nell'elenco, puoi aggiungerlo <a href="/inserisciIngredienteForm">qui</a>.</label>
+			<b>Nome: </b> <span class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+			<input type="text" th:field="*{nome}" />
+			<br/>
+			
+			<b>Descrizione: </b> <span class="error" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span> 
+			<input type="text" th:field="*{descrizione}" />
+			<br/>
+			
 			<div>
-				<span th:if="${#fields.hasErrors('ingredienti')}" th:errors="*{ingredienti}"></span>
+				<b>Ingredienti disponibili: </b> <span class="error" th:if="${#fields.hasErrors('ingredienti')}" th:errors="*{ingredienti}"></span>
+				<div th:each="ingrediente : ${allIngredienti}">
+					<input type="checkbox" th:name="'ingrediente' + ${ingrediente.id}" th:value="${ingrediente.id}" th:field="*{ingredienti}" /> 
+					<label th:for="'ingrediente' + ${ingrediente.id}" th:text="${ingrediente.nome}"></label>
+				</div>
+				<label> Se vuoi aggiungere un ingrediente non presente
+					nell'elenco, puoi aggiungerlo <a href="/inserisciIngredienteForm">qui</a>.
+				</label>
 			</div>
-		</div>
-		<br>
-		<div>
-			<button type="submit">Inserisci</button>
-		</div>
-	</form>
+			<br>
+			<div>
+				<button class="square-button" type="submit">Inserisci</button>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="fragments/layout.html :: footer"></footer>
 </body>
 </html>

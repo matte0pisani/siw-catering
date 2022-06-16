@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import it.uniroma3.siw.model.Buffet;
 import it.uniroma3.siw.model.Chef;
 import it.uniroma3.siw.repository.ChefRepository;
 
@@ -26,6 +26,7 @@ public class ChefService {
 		return repo.findByNomeAndCognome(nome, cognome) != null;
 	}
 	
+	@Transactional
 	public void salva(Chef c) {
 		repo.save(c);
 	}
@@ -38,4 +39,17 @@ public class ChefService {
 	public List<Chef> getTuttiChefMeno(Chef chef) {
 		return repo.findAllByIdNot(chef.getId());
 	}
+	
+	@Transactional
+	public Chef rimuoviPerId(Long id) {
+		Chef result = repo.findById(id).get();
+		repo.deleteById(id);
+		return result;
+	}
+
+	public void save(Chef chef) {
+		repo.save(chef);		
+	}
+	
+	
 }

@@ -3,9 +3,9 @@ package it.uniroma3.siw.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +34,7 @@ public class Buffet {
 	private Chef chef;
 	
 	@NotEmpty
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<Piatto> piatti;
 	
 	public Buffet(String nome, String descrizione) {
@@ -104,7 +104,12 @@ public class Buffet {
 	}
 
 	public void removePiatto(Piatto piattoPerId) {
-		this.piatti.remove(piattoPerId);		
+		// FIXME perché non riesco a rimuovere elementi da una collezione?
+		List<Piatto> newPiatti = new ArrayList<Piatto>();
+		for(Piatto p : piatti)
+			if(p.getId() != piattoPerId.getId())
+				newPiatti.add(p);
+		this.piatti = newPiatti;
 	}
 	
 	@Override

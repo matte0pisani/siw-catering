@@ -14,7 +14,7 @@ public interface PiattoRepository extends CrudRepository<Piatto, Long> {
 	
 	public List<Piatto> findByIdNotIn(Collection<Long> ids);
 	
-	@Modifying
-	@Query("delete from buffet_piatti bp where bp.buffet_id = ?1 and bp.piatti_id = ?2")
-	public void rimuoviDaBuffet(Long idBuffet, Long idPiatto);
+//	@Modifying
+////	@Query("delete from buffet_piatti bp where bp.buffet_id = ?1 and bp.piatti_id = ?2")
+//	public void rimuoviDaBuffet(Long idBuffet, Long idPiatto);
 }

@@ -6,24 +6,26 @@
 	<nav th:replace="fragments/layout.html :: navbar"></nav>
 	<div class="container-for-space">
 		<div class="subtitle bottom-border">Inserisci i dati dello chef che vuoi aggiungere:</div>
+		<div>Clicca il bottone in fondo alla pagina per confermare le tue scelte.</div>
+		<div class="error" th:if="${modificaNonValida}" th:text="#{modifica.nonvalida}"></div>
 		
-		<form class="form-content" th:action="@{/admin/inserisciChef}" th:object="${chef}" method="POST">
+		<form class="form-content" th:action="@{'/admin/modificaChef/' + ${chef.id}}" th:object="${chef}" method="POST">
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore globale</p>
 			</div>
 			
 			<b>Nome</b> <span class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-			<input type="text" th:field="*{nome}" />
+			<input type="text" th:field="*{nome}" value="${chef.nome}"/>
 
 			<b>Cognome</b><span class="error" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span> 
-			<input type="text" th:field="*{cognome}" />
+			<input type="text" th:field="*{cognome}" value="${chef.cognome}"/>
 
 			<b>Nazionalit&agrave;</b> <span class="error" th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></span>
-			<input type="text" th:field="*{nazionalita}" />
+			<input type="text" th:field="*{nazionalita}" value="${chef.nazionalita}"/>
 			<br>	
 			
 			<div>
-				<button class="square-button" type="submit">Inserisci</button>
+				<button class="square-button" type="submit">Modifica</button>
 			</div>
 		</form>
 	</div>

@@ -28,6 +28,20 @@ public class ChefController {
 		return "inserisciChefForm.html";
 	}
 	
+	@GetMapping("/admin/modificaChef/{id}")
+	public String modificaChefForm(@PathVariable("id") Long id, Model model) {
+		Chef chef = service.getChefPerId(id);
+		model.addAttribute("chef", chef);
+		return "modificaChefForm.html";
+	}
+	
+	@GetMapping("/admin/chefPage")
+	public String getBuffetPage(Model model) {
+		model.addAttribute("admin", true);
+		model.addAttribute("chefs", service.getTuttiChef());
+		return "chefs.html";
+	}
+	
 	@GetMapping("/chef/all")
 	public String getTuttiChef(Model model) {
 		model.addAttribute("chefs", service.getTuttiChef());
@@ -45,9 +59,43 @@ public class ChefController {
 		validator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			service.salva(chef);
-			return "confermaInserimentoChef.html";
+			model.addAttribute("chefNuovo", chef);
+			model.addAttribute("chefs", service.getTuttiChef());
+			model.addAttribute("admin", true);
+			return "chefs.html";
 		}
 		return "inserisciChefForm.html"; 
 	}
+	
+	@PostMapping("/admin/modificaChef/{id}")
+	public String modificaChef(@PathVariable("id") Long id, @Valid Chef chef,
+								BindingResult bindingResult, Model model) {
+		Chef oldChef = service.getChefPerId(id);
+		if(!bindingResult.hasErrors()) {
+			// no id
+			oldChef.setNome(chef.getNome());
+			oldChef.setCognome(chef.getCognome());
+			oldChef.setNazionalita(chef.getNazionalita());
+			service.save(oldChef);
+			
+			model.addAttribute("chefModificato", oldChef);
+			model.addAttribute("chefs", service.getTuttiChef());
+			model.addAttribute("admin", true);
+			return "chefs.html";
+		}
+		model.addAttribute("modificaNonValida", true);
+		model.addAttribute("chef", oldChef);
+		return "modificaChefForm.html";
+	}
+		
+	@GetMapping("/admin/eliminaChef/{id}")
+	public String eliminaUnoChef(@PathVariable("id") Long id, Model model) {
+		Chef chef = service.rimuoviPerId(id);
+		model.addAttribute("chefRimosso", chef);
+		model.addAttribute("chefs", service.getTuttiChef());
+		model.addAttribute("admin", true);
+		return "chefs.html";
+	}
+	
 	
 }
